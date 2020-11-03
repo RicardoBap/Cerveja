@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ricbap.brewer.model.Estilo;
 import com.ricbap.brewer.repository.EstiloRepository;
+import com.ricbap.brewer.repository.filter.EstiloFilter;
 import com.ricbap.brewer.service.CadastroEstiloService;
 import com.ricbap.brewer.service.exception.NomeEstiloJaCadastradoException;
 
@@ -65,10 +66,10 @@ public class EstilosController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView pesquisar() {
+	public ModelAndView pesquisar(EstiloFilter estiloFilter, BindingResult result) {
 		ModelAndView mv = new ModelAndView("estilo/PesquisaEstilo");
 		
-		mv.addObject("estilos", estiloRepository.findAll());
+		mv.addObject("estilos", estiloRepository.filtrar(estiloFilter));
 		return mv;
 	}
 	
