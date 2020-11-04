@@ -44,6 +44,7 @@ public class PageWrapper<T> {
 		return page.getTotalPages();
 	}
 	
+	
 	public String urlParaPagina(int pagina) {
 		return uriBuilder.replaceQueryParam("page", pagina).build(true).encode().toUriString();
 	}

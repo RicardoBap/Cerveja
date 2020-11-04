@@ -1,9 +1,9 @@
 package com.ricbap.brewer.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ricbap.brewer.controller.page.PageWrapper;
 import com.ricbap.brewer.model.Estilo;
 import com.ricbap.brewer.repository.EstiloRepository;
 import com.ricbap.brewer.repository.filter.EstiloFilter;
@@ -70,17 +71,14 @@ public class EstilosController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView pesquisar(EstiloFilter estiloFilter, BindingResult result,
-			@PageableDefault(size = 2) Pageable pageable) {
+			@PageableDefault(size = 3) Pageable pageable, HttpServletRequest httpServletRequest) {
 		
-		ModelAndView mv = new ModelAndView("estilo/PesquisaEstilo");
+		ModelAndView mv = new ModelAndView("estilo/PesquisaEstilo");		
 		
-		//System.out.println(">>> Numero da pagina " + pageable.getPageNumber());;
-		//System.out.println(">>> Tamanho da pagina " + pageable.getPageSize());
+		PageWrapper<Estilo> paginaWrapper = 
+				new PageWrapper<>(estiloRepository.filtrar(estiloFilter, pageable), httpServletRequest);
 		
-		Page<Estilo> pagina = estiloRepository.filtrar(estiloFilter, pageable);
-		mv.addObject("pagina", pagina);
-		//mv.addObject("estilos", estiloRepository.filtrar(estiloFilter, pageable));
-		//mv.addObject("estilos", estiloRepository.findAll(pageable));
+		mv.addObject("pagina", paginaWrapper);		
 		return mv;
 	}
 	

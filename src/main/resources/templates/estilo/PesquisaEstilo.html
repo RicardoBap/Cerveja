@@ -59,7 +59,7 @@
 					</tr>
 				</thead>					
 				<tbody>
-					<tr th:each="estilo : ${pagina.content}">
+					<tr th:each="estilo : ${pagina.conteudo}">
 						<td class="text-center" th:text="${estilo.codigo}">Código</td>
 						<td th:text="${estilo.nome}">Nome</td>
 						<td class="text-center">
@@ -72,30 +72,30 @@
 						</td>
 					</tr>
 				</tbody>
-				<tr th:if="${#lists.isEmpty(pagina.content)}">
+				<tr th:if="${pagina.vazia}">
 					<td colspan="3">Nenhum estilo encontrado</td>
 				</tr>
 			</table>
 		</div>
 		
-		<div class="col-sm-12  text-center" th:if="${not  #lists.isEmpty(pagina.content)}">
+		<div class="col-sm-12  text-center" th:if="${not  pagina.vazia}">
 			<nav>
-				<ul class="pagination  pagination-sm" th:with="paginaAtual=${pagina.number}">
-				    <li class="page-item" th:class="${pagina.first} ? disabled" >
-				    	<a class="page-link" th:href="|?page=${paginaAtual - 1}|" th:remove="${pagina.first} ? tag" >
+				<ul class="pagination  pagination-sm" th:with="paginaAtual=${pagina.atual}">
+				    <li class="page-item" th:class="${pagina.primeira} ? disabled" >
+				    	<a class="page-link" th:href="${pagina.urlParaPagina(paginaAtual - 1)}" th:remove="${pagina.primeira} ? tag" >
 				        	<span aria-hidden="true">&laquo;</span>
 				    	</a>
 				    </li>
 				    
-				    <th:block th:each="p : ${#numbers.sequence(1, pagina.totalPages)}" 
+				    <th:block th:each="p : ${#numbers.sequence(1, pagina.total)}" 
 				    	th:with="numeroPagina=${p - 1}" >
 				    	<li class="page-item" th:class="${paginaAtual == numeroPagina} ? active">
-				    		<a class="page-link" th:href="|?page=${numeroPagina}|">[[${p}]]</a>
+				    		<a class="page-link" th:href="${pagina.urlParaPagina(numeroPagina)}">[[${p}]]</a>
 				    	</li>
 				    </th:block>				   
 				    
-				    <li class="page-item" th:class="${pagina.last} ? disabled" > 
-				    	<a class="page-link" th:href="|?page=${paginaAtual + 1}|" th:remove="${pagina.last} ? tag" >
+				    <li class="page-item" th:class="${pagina.ultima} ? disabled" > 
+				    	<a class="page-link" th:href="${pagina.urlParaPagina(paginaAtual + 1)}" th:remove="${pagina.ultima} ? tag" >
 				        	<span aria-hidden="true">&raquo;</span>
 				    	</a>
 				    </li>
