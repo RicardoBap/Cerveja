@@ -53,15 +53,23 @@
 			<table class="table  table-hover">
 				<thead>
 					<tr>
-						<th class="table-estilo-col-codigo" >Código
-							<span class="dropup">
-								<span class="caret"></span>
-							</span>
+						<th class="table-estilo-col-codigo" >
+							<a th:href="${pagina.urlOrdenada('codigo')}"  th:remove="${pagina.vazia} ? tag">
+								<span>Código</span>
+								<span class="dropup" th:remove="${pagina.descendente('codigo')} ? tag" 
+									th:if="${pagina.ordenada('codigo')}">
+									<span class="caret"></span>
+								</span>
+							</a>
 						</th>
-						<th class="table-estilo-col-nome" >Nome
-							<span class="dropup">
-								<span class="caret"></span>
-							</span>
+						<th class="table-estilo-col-nome" >
+							<a th:href="${pagina.urlOrdenada('nome')}"  th:remove="${pagina.vazia} ? tag">
+								<span>Nome</span>
+								<span class="dropup" th:remove="${pagina.descendente('nome')} ? tag" 
+									th:if="${pagina.ordenada('nome')}">
+									<span class="caret"></span>
+								</span>
+							</a>
 						</th>
 						<th class="table-estilo-col-acoes" ></th>
 					</tr>

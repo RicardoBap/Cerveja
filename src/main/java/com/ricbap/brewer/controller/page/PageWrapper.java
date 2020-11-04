@@ -60,13 +60,11 @@ public class PageWrapper<T> {
 	
 	
 	public String inverterDirecao(String propriedade) {
-		String direcao = "asc";
-		
+		String direcao = "asc";		
 		Order order = page.getSort() != null ? page.getSort().getOrderFor(propriedade) : null;
 		if (order != null) {
 			direcao = Sort.Direction.ASC.equals(order.getDirection()) ? "desc" : "asc";
-		}
-		
+		}		
 		return direcao;
 	}
 	
@@ -77,12 +75,10 @@ public class PageWrapper<T> {
 	
 	
 	public boolean ordenada(String propriedade) {
-		Order order = page.getSort() != null ? page.getSort().getOrderFor(propriedade) : null;
-		
+		Order order = page.getSort() != null ? page.getSort().getOrderFor(propriedade) : null;		
 		if (order == null) {
 			return false;
-		}
-		
+		}		
 		return page.getSort().getOrderFor(propriedade) != null ? true : false;
 	}
 
