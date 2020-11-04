@@ -3,6 +3,7 @@ package com.ricbap.brewer.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
@@ -73,10 +74,12 @@ public class EstilosController {
 		
 		ModelAndView mv = new ModelAndView("estilo/PesquisaEstilo");
 		
-		System.out.println(">>> Numero da pagina " + pageable.getPageNumber());;
-		System.out.println(">>> Tamanho da pagina " + pageable.getPageSize());
+		//System.out.println(">>> Numero da pagina " + pageable.getPageNumber());;
+		//System.out.println(">>> Tamanho da pagina " + pageable.getPageSize());
 		
-		mv.addObject("estilos", estiloRepository.filtrar(estiloFilter, pageable));
+		Page<Estilo> pagina = estiloRepository.filtrar(estiloFilter, pageable);
+		mv.addObject("pagina", pagina);
+		//mv.addObject("estilos", estiloRepository.filtrar(estiloFilter, pageable));
 		//mv.addObject("estilos", estiloRepository.findAll(pageable));
 		return mv;
 	}
