@@ -165,18 +165,20 @@
 			</table>			
 		</div>
 		
-		<div class="col-sm-12  text-center"  th:if="${not  pagina.vazia}" >	 <!-- th:if="${not  #lists.isEmpty(pagina.conteudo)}" -->		
+		<brewer:pagination page="${pagina}" />
+		
+		<!-- <div class="col-sm-12  text-center"  th:if="${not  pagina.vazia}" >	 th:if="${not  #lists.isEmpty(pagina.conteudo)}"		
 			<nav >
-			  <ul class="pagination  pagination-sm" th:with="paginaAtual = ${pagina.atual}"> <!-- th:with="paginaAtual = ${pagina.number}" -->
+			  <ul class="pagination  pagination-sm" th:with="paginaAtual = ${pagina.atual}"> th:with="paginaAtual = ${pagina.number}"
 			    <li class="page-item" th:class="${pagina.primeira} ? disabled">
 			      <a class="page-link" th:href="${pagina.urlParaPagina(paginaAtual - 1)}" aria-label="Previous" th:remove="${pagina.primeira} ? tag">
 			        <span aria-hidden="true">&laquo;</span>
 			      </a>
 			    </li>			    
 			    
-			    <th:block th:each="p : ${#numbers.sequence(1, pagina.total)}"  th:with="numeroPagina = ${p - 1}">  <!-- paginaAtual = ${pagina.number} -->
+			    <th:block th:each="p : ${#numbers.sequence(1, pagina.total)}"  th:with="numeroPagina = ${p - 1}">  paginaAtual = ${pagina.number}
 			    	<li class="page-item  active"  th:class="${paginaAtual == numeroPagina} ? active">
-			    		<a class="page-link" th:href="${pagina.urlParaPagina(numeroPagina)}">[[${p}]]</a> <!-- th:href="|?page=${numeroPagina}|" -->
+			    		<a class="page-link" th:href="${pagina.urlParaPagina(numeroPagina)}">[[${p}]]</a> th:href="|?page=${numeroPagina}|"
 			    	</li>
 			    </th:block>
 			    
@@ -187,7 +189,7 @@
 			    </li>
 			  </ul>
 			</nav>
-		</div>
+		</div> -->
 		
 	</div>
 
