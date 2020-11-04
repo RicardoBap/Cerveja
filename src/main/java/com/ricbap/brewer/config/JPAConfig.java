@@ -4,6 +4,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
@@ -19,6 +20,7 @@ import com.ricbap.brewer.model.Cerveja;
 import com.ricbap.brewer.repository.CervejaRepository;
 
 @Configuration
+@ComponentScan(basePackageClasses = CervejaRepository.class)
 @EnableJpaRepositories(basePackageClasses = CervejaRepository.class, enableDefaultTransactions = false)
 @EnableTransactionManagement
 public class JPAConfig {
