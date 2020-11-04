@@ -9,6 +9,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
@@ -23,9 +24,16 @@ public class EstiloRepositoryImpl implements EstiloRepositoryQuery {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true) // transacao apenas leitura
-	public List<Estilo> filtrar(EstiloFilter filter) {
+	public List<Estilo> filtrar(EstiloFilter filter, Pageable pageable) {
 		
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Estilo.class);
+		
+		int paginaAtual = pageable.getPageNumber();
+		int totalRegistrosPorPagina = pageable.getPageSize();
+		int primeiroRegistro = paginaAtual * totalRegistrosPorPagina;
+		
+		criteria.setFirstResult(primeiroRegistro);
+		criteria.setMaxResults(totalRegistrosPorPagina);
 		
 		if (filter != null) {
 			if (!StringUtils.isEmpty(filter.getNome())) {
