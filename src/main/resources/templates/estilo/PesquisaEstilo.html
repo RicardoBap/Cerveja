@@ -87,11 +87,14 @@
 				    	</a>
 				    </li>
 				    
-				    <th:block th:each="p : ${#numbers.sequence(1, pagina.totalPages)}">
-				    	<li class="page-item"><a class="page-link" th:href="|?page=${p - 1}|">[[${p}]]</a></li>
+				    <th:block th:each="p : ${#numbers.sequence(1, pagina.totalPages)}" 
+				    	th:with="numeroPagina=${p - 1}, paginaAtual=${pagina.number}">
+				    	<li class="page-item" th:class="${paginaAtual == numeroPagina} ? active">
+				    		<a class="page-link" th:href="|?page=${numeroPagina}|">[[${p}]]</a>
+				    	</li>
 				    </th:block>				   
 				    
-				    <li class="page-item  disabled">
+				    <li class="page-item  disabled"> 
 				    	<a class="page-link" href="#" aria-label="Next">
 				        	<span aria-hidden="true">&raquo;</span>
 				    	</a>
