@@ -3,7 +3,8 @@
       xmlns:th="http://www.thymeleaf.org"
       
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="'layout/LayoutPadrao'" >
+      layout:decorate="~{layout/LayoutPadrao}" >
+      <!-- layout:decorator="'layout/LayoutPadrao'" > -->
        
 <head>
 	<title>Cadastro de cliente</title>
@@ -21,18 +22,12 @@
 
 	<div class="container-fluid">	
 
-		<form method="POST"  th:object="${cliente}"  class="form-vertical  js-form-loading">
-		
-			<span th:text="${#fields.hasAnyErrors()}"></span>
-			<div th:each="erro : ${#fields.detailedErrors()}">
-				<span th:text="${erro.message}"></span>
-			</div>
-			<span th:text="${mensagem}">Erro no formulário</span>
+		<form method="POST"   class="form-vertical  js-form-loading">			
 			
 			<div class="row">					
 				<div class="col-sm-12  form-group">
 					<label for="nome">Nome</label>
-					<input id="nome" type="text" class="form-control" th:field="*{nome}" />						
+					<input id="nome" type="text" class="form-control"  />						
 				</div>
 			</div>		
 
@@ -53,7 +48,7 @@
 				
 				<div class="col-sm-8  form-group">						
 					<label for="cpfCnpj">CPF/CNPJ</label>
-					<input id="cpfCnpj" type="text" class="form-control" th:field="*{cpfCnpj}"/>						
+					<input id="cpfCnpj" type="text" class="form-control" />						
 				</div>													
 			</div>
 				
@@ -61,11 +56,11 @@
 				<div class="col-sm-4  form-group">						
 					<label for="telefone">Telefone</label>
 					<input id="telefone" type="text" class="form-control  js-phone-number" />											
-				</div>
+				</div>				
 				
 				<div class="col-sm-8  form-group">						
 					<label for="email">E-mail</label>					
-					<input id="email" type="text" class="form-control" th:field="*{email}"/>											
+					<input id="email" type="text" class="form-control" />											
 				</div>
 			</div>
 			
