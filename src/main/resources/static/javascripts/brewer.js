@@ -11,10 +11,8 @@ Brewer.MaskMoney = (function() {
             this.decimal.maskMoney({ decimal: ',', thousands: '.' });
             this.plain.maskMoney({ precision: 0, thousands: '.' });
         }
-    }	
-	
-	return MaskMoney;
-	
+    }		
+	return MaskMoney;	
 })();
 
 
@@ -34,11 +32,27 @@ Brewer.MaskPhoneNumber = (function() {
 		    }
 		};
 		this.inputPhoneNumber.mask(maskBehavior, options);
+	}	
+	return MaskPhoneNumber;	
+})();
+
+Brewer.MaskCep = (function() {
+	
+	function MaskCep() {
+		this.inputCep = $('.js-cep');
 	}
 	
-	return MaskPhoneNumber;
-	
-})();
+	MaskCep.prototype.enable = function() {
+		var options =  {
+				onKeyPress: function(cep, e, field, options) {
+					var masks = ['00000-000', '0-00-00-00'];
+				    var mask = (cep.length>7) ? masks[1] : masks[0];
+				    $('.crazy_cep').mask(mask, options);
+		}};
+		this.inputCep.mask('00000-000', options);
+	}	
+	return MaskCep;
+}());
 
 
 $(function() {
@@ -47,6 +61,9 @@ $(function() {
 	
 	var maskPhoneNumber = new Brewer.MaskPhoneNumber();
 	maskPhoneNumber.enable();
+	
+	var maskCep = new Brewer.MaskCep();
+	maskCep.enable();
 })
 
 
