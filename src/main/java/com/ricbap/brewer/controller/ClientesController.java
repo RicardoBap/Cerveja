@@ -3,7 +3,6 @@ package com.ricbap.brewer.controller;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,19 +16,17 @@ import com.ricbap.brewer.model.Cliente;
 public class ClientesController {
 	
 	@GetMapping("/novo")
-	public String novo() {
+	public String novo(Cliente cliente) {
 		return "cliente/CadastroCliente";
 	}
 	
 	@PostMapping("/novo")
-	public String cadastrar(@Valid Cliente cliente, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-		if(result.hasErrors()) {
-			model.addAttribute("mensagem", "Erro no formulário");
-			System.out.println(">>>> Tem erro sim!");
-			return "cliente/CadastroCliente";
+	public String cadastrar(@Valid Cliente cliente, BindingResult result, RedirectAttributes redirectAttributes) {
+		if(result.hasErrors()) {			
+			return novo(cliente);
 		}
 		
-		redirectAttributes.addFlashAttribute("mensagem", "Nome salvo com sucesso!");
+		redirectAttributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso!");
 		System.out.println(">>>> Nome: " + cliente.getNome());
 		return "redirect:/clientes/novo";
 	}

@@ -6,10 +6,15 @@ public class Cliente {
 	
 	private Long codigo;
 	
-	@NotBlank
+	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
-	private String cpfOuCnpj;
+	
+	@NotBlank(message = "CPF ou CNPJ é obrigatório")
+	private String cpfCnpj;
+	
 	private String telefone;
+	
+	@NotBlank(message = "E-mail é obrigatório")
 	private String email;
 	
 	
@@ -25,11 +30,11 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getCpfOuCnpj() {
-		return cpfOuCnpj;
+	public String getCpfCnpj() {
+		return cpfCnpj;
 	}
-	public void setCpfOuCnpj(String cpfOuCnpj) {
-		this.cpfOuCnpj = cpfOuCnpj;
+	public void setCpfCnpj(String cpfCnpj) {
+		this.cpfCnpj = cpfCnpj;
 	}
 	public String getTelefone() {
 		return telefone;
