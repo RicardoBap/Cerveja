@@ -21,12 +21,12 @@
 
 	<div class="container-fluid">	
 
-		<form method="POST" th:object="${cliente}" class="form-vertical  js-form-loading">
-		
+		<form method="POST"  class="form-vertical  js-form-loading"> <!-- th:object="${cliente}" -->
+			<span th:text="${mensagem}">Erro no formulário</span>
 			<div class="row">					
 				<div class="col-sm-12  form-group">
 					<label for="nome">Nome</label>
-					<input id="nome" type="text" class="form-control"/>						
+					<input id="nome" type="text" class="form-control" name="nome" />						
 				</div>
 			</div>		
 
@@ -54,7 +54,7 @@
 			<div class="row">
 				<div class="col-sm-4  form-group">						
 					<label for="telefone">Telefone</label>
-					<input id="telefone" type="text" class="form-control" />											
+					<input id="telefone" type="text" class="form-control  js-phone-number" />											
 				</div>
 				
 				<div class="col-sm-8  form-group">						
@@ -104,7 +104,7 @@
 			</div>			
 					
 			<div class="form-group">
-				<button class="btn  btn-primary" type="submit">Salvar</button>					
+				<button class="btn  btn-primary" type="submit" >Salvar</button>					
 			</div>
 		</form>
 	</div>
