@@ -54,6 +54,10 @@
 		<!-- thumbnailator - Gerar Thumbnail -->
 		<!-- https://github.com/coobird/thumbnailator -->
 		<thumbnailator.version>0.4.8</thumbnailator.version>
+		
+		<!-- THYMELEAF EXTRAS DATA ATRIBUTOS -->
+		<thymeleaf-extras-data-attribute.version>2.0.1</thymeleaf-extras-data-attribute.version>
+	
 	</properties>
 	
 	<build>
@@ -209,6 +213,14 @@
 			<artifactId>thumbnailator</artifactId>
 			<version>${thumbnailator.version}</version>
 			<scope>compile</scope>
+		</dependency>
+		
+		<!-- THYMELEAF EXTRAS DATA ATRIBUTOS -->
+		<dependency>
+		    <groupId>com.github.mxab.thymeleaf.extras</groupId>
+		    <artifactId>thymeleaf-extras-data-attribute</artifactId>
+		    <version>${thymeleaf-extras-data-attribute.version}</version>
+		    <scope>compile</scope>
 		</dependency>		
 
 	</dependencies>
