@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ricbap.brewer.model.Cliente;
 import com.ricbap.brewer.model.TipoPessoa;
 import com.ricbap.brewer.repository.EstadoRepository;
+import com.ricbap.brewer.service.CadastroClienteService;
 
 @Controller
 @RequestMapping("/clientes")
@@ -20,6 +21,9 @@ public class ClientesController {
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
+	
+	@Autowired
+	private CadastroClienteService cadastroClienteService;
 
 	@RequestMapping("/novo") //<-----
 	public ModelAndView novo(Cliente cliente) {
@@ -35,6 +39,7 @@ public class ClientesController {
 			return novo(cliente);
 		}
 		
+		cadastroClienteService.salvar(cliente);
 		redirectAttributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso");
 		return new ModelAndView("redirect:/clientes/novo");		
 	}
