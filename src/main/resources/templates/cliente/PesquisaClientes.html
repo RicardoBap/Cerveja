@@ -66,7 +66,7 @@
 					</tr>			
 				</thead>
 				<tbody>
-					<tr th:each="cliente : ${clientes}">
+					<tr th:each="cliente : ${pagina.content}">   <!-- ${cliente} -->
 						<td th:text="${cliente.nome}">Ricardo</td>
 						<td class="text-center" th:text="${cliente.tipoPessoa}">Física</td>
 						<td class="text-right" th:text="${cliente.cpfCnpj}">22493931940</td>
@@ -80,14 +80,14 @@
 							</a>
 						</td>						
 					</tr>
-					<tr th:if="${#lists.isEmpty(clientes)}" >
+					<tr th:if="${#lists.isEmpty(pagina.content)}" >    <!-- th:if="${#lists.isEmpty(clientes)}" -->
 						<td colspan="5">Nenhum cliente encontrado</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>		
 		
-		<div class="col-som-12  text-center">
+		<div class="col-sm-12  text-center" th:if="${not  #lists.isEmpty(pagina.content)}" >
 			<nav aria-label="Page navigation example">
 				<ul class="pagination  pagination-sm">
 			  		<li class="page-item">
@@ -95,9 +95,14 @@
 			        		<span aria-hidden="true">&laquo;</span>
 			    		</a>
 			    	</li>
-			    	<li class="page-item"><a class="page-link" href="?page=0">1</a></li>
-			    	<li class="page-item"><a class="page-link" href="?page=1">2</a></li>
-			    	<li class="page-item"><a class="page-link" href="?page=2">3</a></li>
+			    	
+			    	<th:block th:each="p : ${#numbers.sequence(1, pagina.totalPages)}">
+			    		<li class="page-item"><a class="page-link" th:href="|?page=${p - 1}|">[[${p}]]</a></li>
+			    	</th:block>			    	
+			    	
+			    	<!-- <li class="page-item"><a class="page-link" href="?page=1">2</a></li>
+			    	<li class="page-item"><a class="page-link" href="?page=2">3</a></li> -->
+			    	
 			    	<li class="page-item">
 			    		<a class="page-link" href="#" aria-label="Next">
 			        		<span aria-hidden="true">&raquo;</span>

@@ -3,6 +3,7 @@ package com.ricbap.brewer.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -66,7 +67,8 @@ public class ClientesController {
 		//System.out.println(">>>>>pageSize " + pageable.getPageSize());
 		
 		//mv.addObject("clientes", clienteRepository.findAll());
-		mv.addObject("clientes", clienteRepository.filtrar(clienteFilter, pageable));
+		Page<Cliente> pagina = clienteRepository.filtrar(clienteFilter, pageable);
+		mv.addObject("pagina", pagina);
 		return mv;
 	}
 	
