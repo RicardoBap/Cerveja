@@ -3,6 +3,8 @@ package com.ricbap.brewer.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,11 +59,14 @@ public class ClientesController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar(ClienteFilter clienteFilter) {
+	public ModelAndView pesquisar(ClienteFilter clienteFilter, @PageableDefault(size = 2) Pageable pageable) {
 		ModelAndView mv = new ModelAndView("cliente/PesquisaClientes");
 		
+		//System.out.println(">>>>>pageNumber " + pageable.getPageNumber());
+		//System.out.println(">>>>>pageSize " + pageable.getPageSize());
+		
 		//mv.addObject("clientes", clienteRepository.findAll());
-		mv.addObject("clientes", clienteRepository.filtrar(clienteFilter));
+		mv.addObject("clientes", clienteRepository.filtrar(clienteFilter, pageable));
 		return mv;
 	}
 	
