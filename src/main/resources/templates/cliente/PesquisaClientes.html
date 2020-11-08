@@ -66,7 +66,7 @@
 					</tr>			
 				</thead>
 				<tbody>
-					<tr th:each="cliente : ${pagina.content}">   <!-- ${cliente} -->
+					<tr th:each="cliente : ${pagina.conteudo}">   <!-- ${cliente} | ${pagina.content}-->
 						<td th:text="${cliente.nome}">Ricardo</td>
 						<td class="text-center" th:text="${cliente.tipoPessoa}">Física</td>
 						<td class="text-right" th:text="${cliente.cpfCnpj}">22493931940</td>
@@ -80,32 +80,32 @@
 							</a>
 						</td>						
 					</tr>
-					<tr th:if="${#lists.isEmpty(pagina.content)}" >    <!-- th:if="${#lists.isEmpty(clientes)}" -->
+					<tr th:if="${pagina.vazia}" >    <!-- th:if="${#lists.isEmpty(clientes)}" | th:if="${#lists.isEmpty(pagina.content)}" | th:if="${#lists.isEmpty(pagina.conteudo)}"-->
 						<td colspan="5">Nenhum cliente encontrado</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>		
 		
-		<div class="col-sm-12  text-center" th:if="${not  #lists.isEmpty(pagina.content)}" >
+		<div class="col-sm-12  text-center" th:if="${not  pagina.vazia}" > <!-- th:if="${not  #lists.isEmpty(pagina.content)}" | th:if="${not  #lists.isEmpty(pagina.conteudo)}" -->
 			<nav aria-label="Page navigation example">
-				<ul class="pagination  pagination-sm" th:with="paginaAtual=${pagina.number}">
-			  		<li th:class="${pagina.first} ? disabled">
-			    		<a class="page-link" th:remove="${pagina.first} ? tag" th:href="|?page=${paginaAtual - 1}|" aria-label="Previous">
+				<ul class="pagination  pagination-sm" th:with="paginaAtual=${pagina.atual}">  <!-- th:with="paginaAtual=${pagina.number} -->
+			  		<li th:class="${pagina.primeira} ? disabled">
+			    		<a class="page-link" th:remove="${pagina.primeira} ? tag" th:href="${pagina.urlParaPagina(paginaAtual - 1)}" aria-label="Previous">
 			        		<span aria-hidden="true">&laquo;</span>
 			    		</a>
 			    	</li>
 			    	
-			    	<th:block th:each="p : ${#numbers.sequence(1, pagina.totalPages)}" 
-			    		th:with="numeroPagina=${p - 1}">
+			    	<th:block th:each="p : ${#numbers.sequence(1, pagina.total)}" 
+			    		th:with="numeroPagina=${p - 1}" >
 			    		<li class="page-item" th:class="${paginaAtual == numeroPagina} ? active">
-			    			<a class="page-link" th:href="|?page=${numeroPagina}|">[[${p}]]</a>
+			    			<a class="page-link" th:href="${pagina.urlParaPagina(numeroPagina)}">[[${p}]]</a>
 			    		</li>
 			    	</th:block>		    	
 			    	
 			    	
-			    	<li th:class="${pagina.last} ? disabled">
-			    		<a class="page-link" th:remove="${pagina.last} ? tag" th:href="|?page=${paginaAtual + 1}|" aria-label="Next">
+			    	<li th:class="${pagina.ultima} ? disabled">
+			    		<a class="page-link" th:remove="${pagina.ultima} ? tag" th:href="${pagina.urlParaPagina(paginaAtual + 1)}" aria-label="Next">
 			        		<span aria-hidden="true">&raquo;</span>
 			    		</a>
 			    	</li>
