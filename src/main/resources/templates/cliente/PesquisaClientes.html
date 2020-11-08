@@ -89,23 +89,23 @@
 		
 		<div class="col-sm-12  text-center" th:if="${not  #lists.isEmpty(pagina.content)}" >
 			<nav aria-label="Page navigation example">
-				<ul class="pagination  pagination-sm">
-			  		<li class="page-item">
-			    		<a class="page-link" href="#" aria-label="Previous">
+				<ul class="pagination  pagination-sm" th:with="paginaAtual=${pagina.number}">
+			  		<li th:class="${pagina.first} ? disabled">
+			    		<a class="page-link" th:remove="${pagina.first} ? tag" th:href="|?page=${paginaAtual - 1}|" aria-label="Previous">
 			        		<span aria-hidden="true">&laquo;</span>
 			    		</a>
 			    	</li>
 			    	
 			    	<th:block th:each="p : ${#numbers.sequence(1, pagina.totalPages)}" 
-			    		th:with="numeroPagina=${p - 1}, paginaAtual=${pagina.number}">
+			    		th:with="numeroPagina=${p - 1}">
 			    		<li class="page-item" th:class="${paginaAtual == numeroPagina} ? active">
 			    			<a class="page-link" th:href="|?page=${numeroPagina}|">[[${p}]]</a>
 			    		</li>
 			    	</th:block>		    	
 			    	
 			    	
-			    	<li class="page-item">
-			    		<a class="page-link" href="#" aria-label="Next">
+			    	<li th:class="${pagina.last} ? disabled">
+			    		<a class="page-link" th:remove="${pagina.last} ? tag" th:href="|?page=${paginaAtual + 1}|" aria-label="Next">
 			        		<span aria-hidden="true">&raquo;</span>
 			    		</a>
 			    	</li>
