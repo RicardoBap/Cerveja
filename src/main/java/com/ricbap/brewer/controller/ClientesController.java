@@ -15,6 +15,7 @@ import com.ricbap.brewer.model.Cliente;
 import com.ricbap.brewer.model.TipoPessoa;
 import com.ricbap.brewer.repository.ClienteRepository;
 import com.ricbap.brewer.repository.EstadoRepository;
+import com.ricbap.brewer.repository.filter.ClienteFilter;
 import com.ricbap.brewer.service.CadastroClienteService;
 import com.ricbap.brewer.service.exception.CpfCnpjClienteCadastradoException;
 
@@ -56,10 +57,11 @@ public class ClientesController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar() {
+	public ModelAndView pesquisar(ClienteFilter clienteFilter) {
 		ModelAndView mv = new ModelAndView("cliente/PesquisaClientes");
 		
-		mv.addObject("clientes", clienteRepository.findAll());
+		//mv.addObject("clientes", clienteRepository.findAll());
+		mv.addObject("clientes", clienteRepository.filtrar(clienteFilter));
 		return mv;
 	}
 	
