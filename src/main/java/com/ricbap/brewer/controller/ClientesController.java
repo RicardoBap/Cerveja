@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ricbap.brewer.model.Cliente;
 import com.ricbap.brewer.model.TipoPessoa;
+import com.ricbap.brewer.repository.ClienteRepository;
 import com.ricbap.brewer.repository.EstadoRepository;
 import com.ricbap.brewer.service.CadastroClienteService;
 import com.ricbap.brewer.service.exception.CpfCnpjClienteCadastradoException;
@@ -26,6 +27,9 @@ public class ClientesController {
 	
 	@Autowired
 	private CadastroClienteService cadastroClienteService;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
 
 	@RequestMapping("/novo") //<-----
 	public ModelAndView novo(Cliente cliente) {
@@ -55,6 +59,7 @@ public class ClientesController {
 	public ModelAndView pesquisar() {
 		ModelAndView mv = new ModelAndView("cliente/PesquisaClientes");
 		
+		mv.addObject("clientes", clienteRepository.findAll());
 		return mv;
 	}
 	

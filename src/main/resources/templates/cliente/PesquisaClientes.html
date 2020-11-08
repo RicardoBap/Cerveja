@@ -66,11 +66,11 @@
 					</tr>			
 				</thead>
 				<tbody>
-					<tr>
-						<td>Ricardo</td>
-						<td class="text-center">Física</td>
-						<td class="text-right">22493931940</td>
-						<td class="text-right">(19)99659-2800</td>
+					<tr th:each="cliente : ${clientes}">
+						<td th:text="${cliente.nome}">Ricardo</td>
+						<td class="text-center" th:text="${cliente.tipoPessoa}">Física</td>
+						<td class="text-right" th:text="${cliente.cpfCnpj}">22493931940</td>
+						<td class="text-right" th:text="${cliente.telefone}">(19)99659-2800</td>
 						<td class="text-center">
 							<a class="btn  btn-link  btn-xs" title="Editar">
 								<i class="glyphicon  glyphicon-pencil"></i>
