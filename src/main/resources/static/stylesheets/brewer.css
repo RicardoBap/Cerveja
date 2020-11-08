@@ -108,7 +108,7 @@
 
 /*
 ################################################
-#### PÁGINAS DO SISTEMA PESQUISA DE ESTILO ####
+#### PÁGINAS DO SISTEMA PESQUISA DE ESTILO #####
 ################################################
 */
 
@@ -121,5 +121,27 @@
 	width: 80px;
 }
 
+/*
+#################################################
+#### PÁGINAS DO SISTEMA PESQUISA DE CLIENTES ####
+#################################################
+*/
+.table-cliente-col-tipoPessoa {
+	width: 130px;
+	text-align: center;
+}
 
+.table-cliente-col-cpfCnpj {
+	width: 150px;
+	text-align: right;	
+}
+
+.table-cliente-col-telefone {
+	width: 130px;
+	text-align: right;
+}
+
+.table-cliente-col-acoes {
+	width: 80px;
+}
 
