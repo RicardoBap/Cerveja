@@ -21,6 +21,10 @@ public enum TipoPessoa {
 		this.mascara = mascara;
 		this.grupo = grupo;
 	}
+	
+	public static String removerFormatacao(String cpfCnpj) {
+		return cpfCnpj.replaceAll("\\.|-|/", "");
+	}
 
 	public String getDescricao() {
 		return descricao;

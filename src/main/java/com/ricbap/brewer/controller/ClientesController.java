@@ -14,6 +14,7 @@ import com.ricbap.brewer.model.Cliente;
 import com.ricbap.brewer.model.TipoPessoa;
 import com.ricbap.brewer.repository.EstadoRepository;
 import com.ricbap.brewer.service.CadastroClienteService;
+import com.ricbap.brewer.service.exception.CpfCnpjClienteCadastradoException;
 
 @Controller
 @RequestMapping("/clientes")
@@ -39,7 +40,12 @@ public class ClientesController {
 			return novo(cliente);
 		}
 		
-		cadastroClienteService.salvar(cliente);
+		try {
+			cadastroClienteService.salvar(cliente);
+		} catch(CpfCnpjClienteCadastradoException e) {
+			result.rejectValue("cpfCnpj", e.getMessage(), e.getMessage());
+			return novo(cliente);
+		}
 		redirectAttributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso");
 		return new ModelAndView("redirect:/clientes/novo");		
 	}
