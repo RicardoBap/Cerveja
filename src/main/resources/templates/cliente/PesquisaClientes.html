@@ -58,12 +58,24 @@
 			<table class="table  table-hover">
 				<thead>
 					<tr>
-						<th class="table-cliente-col-nome">Nome
-							<span class="dropup">
-								<span class="caret"></span>
-							</span>
+						<th class="table-cliente-col-nome">
+							<a th:href="${pagina.urlOrdenada('nome')}" th:remove="${pagina.vazia} ? tag" > 
+								<span>Nome</span>
+								<span class="dropup" th:remove="${pagina.descendente('nome')} ? tag" 
+									th:if="${pagina.ordenada('nome')}">
+									<span class="caret"></span>
+								</span>
+							</a>
 						</th>
-						<th class="table-cliente-col-tipoPessoa">Tipo Pessoa</th>
+						<th class="table-cliente-col-tipoPessoa">
+							<a th:href="${pagina.urlOrdenada('tipoPessoa')}" th:remove="${pagina.vazia} ? tag" > 
+								<span>Tipo Pessoa</span>
+								<span class="dropup" th:remove="${pagina.descendente('tipoPessoa')} ? tag" 
+									th:if="${pagina.ordenada('tipoPessoa')}">
+									<span class="caret"></span>
+								</span>
+							</a>
+						</th>
 						<th class="table-cliente-col-cpfCnpj">CPF/CNPJ</th>
 						<th class="table-cliente-col-telefone">Telefone</th>
 						<th class="table-cliente-col-acoes"></th>

@@ -38,11 +38,10 @@ public class ClienteRepositoryImpl implements ClienteRepositoryQuery {
 		criteria.setMaxResults(totalRegistrosPorPagina);
 		
 		Sort sort = pageable.getSort();
-		//System.out.println("Sort " + sort);
 		if (sort != null) {
 			Sort.Order order = sort.iterator().next();
-			String propriedadeCampo = order.getProperty();
-			criteria.addOrder(order.isAscending() ? Order.asc(propriedadeCampo) : Order.desc(propriedadeCampo));
+			String propriedade = order.getProperty();
+			criteria.addOrder(order.isAscending() ? Order.asc(propriedade) : Order.desc(propriedade));
 		}
 		
 		adicionarFiltro(filter, criteria);
