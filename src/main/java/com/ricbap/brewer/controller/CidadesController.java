@@ -69,8 +69,8 @@ public class CidadesController {
 		}
 		
 		attributes.addFlashAttribute("mensagem", "Cidade salva com sucesso!");
-		return new ModelAndView("redirect:/cidades/nova");
-		
-	}
+		return new ModelAndView("redirect:/cidades/nova");		
+	}	
+	
 
 }
