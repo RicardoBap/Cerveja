@@ -108,11 +108,13 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>		
+		</div>
 		
-		<div class="col-sm-12  text-center" th:if="${not  pagina.vazia}" > <!-- th:if="${not  #lists.isEmpty(pagina.content)}" | th:if="${not  #lists.isEmpty(pagina.conteudo)}" -->
+		<brewer:pagination page="${pagina}" />		
+		
+		<!-- <div class="col-sm-12  text-center" th:if="${not  pagina.vazia}" > th:if="${not  #lists.isEmpty(pagina.content)}" | th:if="${not  #lists.isEmpty(pagina.conteudo)}"
 			<nav aria-label="Page navigation example">
-				<ul class="pagination  pagination-sm" th:with="paginaAtual=${pagina.atual}">  <!-- th:with="paginaAtual=${pagina.number} -->
+				<ul class="pagination  pagination-sm" th:with="paginaAtual=${pagina.atual}">  th:with="paginaAtual=${pagina.number}
 			  		<li th:class="${pagina.primeira} ? disabled">
 			    		<a class="page-link" th:remove="${pagina.primeira} ? tag" th:href="${pagina.urlParaPagina(paginaAtual - 1)}" aria-label="Previous">
 			        		<span aria-hidden="true">&laquo;</span>
@@ -134,7 +136,7 @@
 			    	</li>
 				</ul>
 			</nav>
-		</div>		
+		</div> -->		
 		
 	</div>
 	
