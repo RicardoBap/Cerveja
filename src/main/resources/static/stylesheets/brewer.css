@@ -127,17 +127,22 @@
 #################################################
 */
 .table-cliente-col-tipoPessoa {
-	width: 130px;
+	width: 120px;
 	text-align: center;
 }
 
 .table-cliente-col-cpfCnpj {
-	width: 150px;
+	width: 140px;
 	text-align: right;	
 }
 
 .table-cliente-col-telefone {
-	width: 150px;
+	width: 140px;
+	text-align: right;
+}
+
+.table-cliente-col-cidade-estado {
+	width: 140px;
 	text-align: right;
 }
 
