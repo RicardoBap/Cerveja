@@ -4,7 +4,8 @@
       
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:data="http://www.thymeleaf.org/extras/data"
-      layout:decorate="~{layout/LayoutPadrao}" >     
+      layout:decorate="~{layout/LayoutPadrao}" 
+      xmlns:brewer="http://ric_bap.com" >     
        
 <head>
 	<title>Pesquisa de clientes</title>
@@ -59,22 +60,28 @@
 				<thead>
 					<tr>
 						<th class="table-cliente-col-nome">
-							<a th:href="${pagina.urlOrdenada('nome')}" th:remove="${pagina.vazia} ? tag" > 
+							<brewer:order page="${pagina}" field="nome" text="Nome" />
+							<!-- <th:block th:replace="fragments/Ordenacao :: order (${pagina}, 'nome', 'Nome')">
+							</th:block> -->
+							<!-- <a th:href="${pagina.urlOrdenada('nome')}" th:remove="${pagina.vazia} ? tag" > 
 								<span>Nome</span>
 								<span class="dropup" th:remove="${pagina.descendente('nome')} ? tag" 
 									th:if="${pagina.ordenada('nome')}">
 									<span class="caret"></span>
 								</span>
-							</a>
+							</a> -->
 						</th>
 						<th class="table-cliente-col-tipoPessoa">
-							<a th:href="${pagina.urlOrdenada('tipoPessoa')}" th:remove="${pagina.vazia} ? tag" > 
+							<brewer:order page="${pagina}" field="tipoPessoa" text="Tipo Pessoa" />
+							<!-- <th:block th:replace="fragments/Ordenacao :: order (${pagina}, 'tipoPessoa', 'Tipo Pessoa')">
+							</th:block> -->
+							<!-- a th:href="${pagina.urlOrdenada('tipoPessoa')}" th:remove="${pagina.vazia} ? tag" > 
 								<span>Tipo Pessoa</span>
 								<span class="dropup" th:remove="${pagina.descendente('tipoPessoa')} ? tag" 
 									th:if="${pagina.ordenada('tipoPessoa')}">
 									<span class="caret"></span>
 								</span>
-							</a>
+							</a> -->
 						</th>
 						<th class="table-cliente-col-cpfCnpj">CPF/CNPJ</th>
 						<th class="table-cliente-col-telefone">Telefone</th>
