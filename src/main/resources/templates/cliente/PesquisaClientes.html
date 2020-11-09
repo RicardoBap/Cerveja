@@ -91,7 +91,7 @@
 				<tbody>
 					<tr th:each="cliente : ${pagina.conteudo}">   <!-- ${cliente} | ${pagina.content}-->
 						<td th:text="${cliente.nome}">Ricardo</td>
-						<td class="text-center" th:text="${cliente.tipoPessoa}">Física</td>
+						<td class="text-center" th:text="${cliente.tipoPessoa.descricao}">Física</td>
 						<td class="text-right" th:text="${cliente.cpfCnpj}">22493931940</td>
 						<td class="text-right" th:text="${cliente.telefone}">(19)99659-2800</td>
 						<td class="text-center">
