@@ -25,33 +25,33 @@
 		<form method="POST" th:object="${usuario}" class="form-vertical  js-form-loading">
 		
 			<div class="row">					
-				<div class="col-sm-12  form-group">
-					<label for="nome">Nome</label>
-					<input id="nome" type="text" class="form-control"/>						
+				<div class="col-sm-12  form-group  bw-required">
+					<label class="control-label" for="nome">Nome</label>
+					<input class="form-control" id="nome" type="text" />						
 				</div>
 			</div>				
 			
 			<div class="row">
-				<div class="col-sm-6  form-group">						
-					<label for="email">E-mail</label>
-					<input id="email" type="text" class="form-control" />											
+				<div class="col-sm-6  form-group  bw-required">						
+					<label class="control-label" for="email">E-mail</label>
+					<input class="form-control" id="email" type="text"  />											
 				</div>
 				
 				<div class="col-sm-3  form-group">						
-					<label for="dataNascimento">Data nascimento</label>					
-					<input id="dataNascimento" type="text" class="form-control" />											
+					<label class="control-label" for="dataNascimento">Data nascimento</label>					
+					<input class="form-control" id="dataNascimento" type="text" />											
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-3  form-group">						
-					<label for="senha">Senha</label>
-					<input id="senha" type="password" class="form-control" />											
+				<div class="col-sm-3  form-group  bw-required">						
+					<label class="control-label" for="senha">Senha</label>
+					<input class="form-control" id="senha" type="password" />											
 				</div>
 				
-				<div class="col-sm-3  form-group">						
-					<label for="confirmacaoSenha">Confirmação de senha</label>					
-					<input id="confirmacaoSenha" type="password" class="form-control" />											
+				<div class="col-sm-3  form-group  bw-required">						
+					<label class="control-label" for="confirmacaoSenha">Confirmação de senha</label>					
+					<input class="form-control" id="confirmacaoSenha" type="password" />											
 				</div>
 				
 				<div class="col-sm-3  form-group">						
@@ -65,8 +65,8 @@
 			</div>
 			
 			<div class="row">				
-				<div class="col-sm-6  form-group">						
-					<label for="grupos">Grupos</label>
+				<div class="col-sm-6  form-group  bw-required">						
+					<label class="control-label" for="grupos">Grupos</label>
 					<div>
 						<div class="radio radio-inline">
 							<input type="radio" name="grupos">
