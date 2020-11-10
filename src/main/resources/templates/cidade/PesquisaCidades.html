@@ -3,7 +3,9 @@
       xmlns:th="http://www.thymeleaf.org"
       
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/LayoutPadrao}" > 
+      layout:decorate="~{layout/LayoutPadrao}"
+      xmlns:data="http://www.thymeleaf.org/extras/data" 
+      xmlns:brewer="http://ric_bap.com" > 
        
 <head>
 	<title>Pesquisa de cidades</title>	
@@ -35,7 +37,7 @@
 
 	<div class="container-fluid">	
 
-		<form method="GET" th:object="${cidade}"  > 
+		<form method="GET" th:object="${cidadeFilter}"  > 
 		
 			<div class="row">			
 				<div class="col-sm-4  form-group"  >						
@@ -55,7 +57,7 @@
 			</div>					
 					
 			<div class="form-group">
-				<button class="btn  btn-primary" type="submit">Salvar</button>					
+				<button class="btn  btn-primary" type="submit">Pesquisar</button>					
 			</div>
 		
 		</form>
@@ -64,15 +66,19 @@
 			<table class="table  table-hover">
 				<thead>
 					<tr>
-						<th class="table-cidade-col-nome">Nome</th>
-						<th class="table-cidade-col-estado">Estado</th>
+						<th class="table-cidade-col-nome">
+							<brewer:order page="${pagina}" field="nome" text="Nome"/>
+						</th>
+						<th class="table-cidade-col-estado">
+							<brewer:order page="${pagina}" field="estado" text="Estado"/>
+						</th>
 						<th class="table-cidade-col-acoes"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td></td>
-						<td></td>
+					<tr th:each="cidade : ${pagina.conteudo}">
+						<td th:text="${cidade.nome}">Campinas</td>
+						<td class="text-right" th:text="${cidade.estado.nome}">São Paulo</td>
 						<td class="text-center">
 							<a class="btn  btn-link  btn-xs" title="Editar">
 								<i class="glyphicon  glyphicon-pencil"></i>
@@ -82,9 +88,14 @@
 							</a>
 						</td>
 					</tr>
-				</tbody>
+					<tr th:if="${pagina.vazia}">
+						<td colspan="3">Nenhuma cidade encontrada</td>
+					</tr>
+				</tbody>				
 			</table>
 		</div>
+		
+		<brewer:pagination page="${pagina}"/>
 		
 	</div>
 	
