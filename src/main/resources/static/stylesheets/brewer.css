@@ -156,3 +156,12 @@
 #################################################
 */
 
+/* .table-cidade-col-nome {} */
+
+.table-cidade-col-estado {
+	width: 140px;
+}
+
+.table-cidade-col-acoes {
+	width: 80px;
+}
