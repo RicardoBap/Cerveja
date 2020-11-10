@@ -3,7 +3,8 @@
       xmlns:th="http://www.thymeleaf.org"
       
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="~{layout/LayoutPadrao}" >
+      layout:decorate="~{layout/LayoutPadrao}"
+      xmlns:brewer="http://ric_bap.com" >
        
 <head>
 	<title>Cadastro de usuário</title>
@@ -23,18 +24,20 @@
 	<div class="container-fluid">	
 
 		<form method="POST" th:object="${usuario}" class="form-vertical  js-form-loading">
+			
+			<brewer:message />
 		
 			<div class="row">					
-				<div class="col-sm-12  form-group  bw-required">
+				<div class="col-sm-12  form-group  bw-required" brewer:classforerror="nome" >
 					<label class="control-label" for="nome">Nome</label>
-					<input class="form-control" id="nome" type="text" />						
+					<input class="form-control" id="nome" type="text" th:field="*{nome}" />						
 				</div>
 			</div>				
 			
 			<div class="row">
-				<div class="col-sm-6  form-group  bw-required">						
+				<div class="col-sm-6  form-group  bw-required" brewer:classforerror="email" >						
 					<label class="control-label" for="email">E-mail</label>
-					<input class="form-control" id="email" type="text"  />											
+					<input class="form-control" id="email" type="text" th:field="*{email}" />											
 				</div>
 				
 				<div class="col-sm-3  form-group">						
@@ -44,14 +47,14 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-3  form-group  bw-required">						
+				<div class="col-sm-3  form-group  bw-required" brewer:classforerror="senha" >						
 					<label class="control-label" for="senha">Senha</label>
-					<input class="form-control" id="senha" type="password" />											
+					<input class="form-control" id="senha" type="password"  />											
 				</div>
 				
-				<div class="col-sm-3  form-group  bw-required">						
+				<div class="col-sm-3  form-group  bw-required"  >						
 					<label class="control-label" for="confirmacaoSenha">Confirmação de senha</label>					
-					<input class="form-control" id="confirmacaoSenha" type="password" />											
+					<input class="form-control" id="confirmacaoSenha" type="password"  />											
 				</div>
 				
 				<div class="col-sm-3  form-group">						
@@ -65,15 +68,15 @@
 			</div>
 			
 			<div class="row">				
-				<div class="col-sm-6  form-group  bw-required">						
+				<div class="col-sm-6  form-group  bw-required" brewer:classforerror="grupos" >						
 					<label class="control-label" for="grupos">Grupos</label>
 					<div>
 						<div class="radio radio-inline">
-							<input type="radio" name="grupos">
+							<input type="radio" name="grupos" >
 							<label>Administrador</label> 							
 						</div>
 						<div class="radio radio-inline">
-							<input type="radio" name="grupos">
+							<input type="radio" name="grupos" >
 							<label>Vendedor</label> 							
 						</div>							
 					</div>						
