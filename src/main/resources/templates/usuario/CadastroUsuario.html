@@ -8,7 +8,7 @@
        
 <head>
 	<title>Cadastro de usuário</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-toggle.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-toggle.min.css}"/>	
 </head> 
 
 <body>
@@ -42,7 +42,7 @@
 				
 				<div class="col-sm-3  form-group">						
 					<label class="control-label" for="dataNascimento">Data nascimento</label>					
-					<input class="form-control" id="dataNascimento" type="text" th:field="*{dataNascimento}" />											
+					<input class="form-control  js-date" id="dataNascimento" type="text" th:field="*{dataNascimento}" autocomplete="off" />								
 				</div>
 			</div>
 			
@@ -93,6 +93,7 @@
 
 <th:block layout:fragment="javascript-extra">
 	<script th:src="@{/javascripts/vendors/bootstrap-toggle.min.js}"></script>
+	
 	<script>
 	 $(function() {
 	   $('.js-status').bootstrapToggle();
