@@ -14,6 +14,7 @@ import com.ricbap.brewer.model.Usuario;
 import com.ricbap.brewer.repository.GrupoRepository;
 import com.ricbap.brewer.service.CadastroUsuarioService;
 import com.ricbap.brewer.service.exception.EmailUsuarioJaCadastradoException;
+import com.ricbap.brewer.service.exception.SenhaObrigatoriaUsuarioException;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -43,6 +44,9 @@ public class UsuariosController {
 			cadastroUsuarioService.cadastrar(usuario);	
 		} catch(EmailUsuarioJaCadastradoException e) {
 			result.rejectValue("email", e.getMessage(), e.getMessage());
+			return novo(usuario);
+		} catch (SenhaObrigatoriaUsuarioException e) {
+			result.rejectValue("senha", e.getMessage(), e.getMessage());
 			return novo(usuario);
 		}
 		
