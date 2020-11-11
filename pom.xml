@@ -60,6 +60,9 @@
 		
 		<!-- CACHE / GUAVA -->
 		<guava.version>19.0</guava.version>
+		
+		<!-- APACHE / BEAN UTILS -->
+		<commons-beanutils.version>1.9.2</commons-beanutils.version>
 	
 	</properties>
 	
@@ -238,6 +241,14 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- APACHE / BEAN UTILS -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${commons-beanutils.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
