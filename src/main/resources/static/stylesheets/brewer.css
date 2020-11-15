@@ -177,3 +177,13 @@
 	font-family: 'FontAwesome';
 	content: "\f00c";
 }
+
+/*
+################################################
+#### PÁGINAS DO SISTEMA PESQUISA DE CERVEJA ####
+################################################
+*/
+
+.table-usuario-col-acoes {
+	width: 80px
+}

@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ricbap.brewer.model.Usuario;
 import com.ricbap.brewer.repository.GrupoRepository;
+import com.ricbap.brewer.repository.UsuarioRepository;
 import com.ricbap.brewer.service.CadastroUsuarioService;
 import com.ricbap.brewer.service.exception.EmailUsuarioJaCadastradoException;
 import com.ricbap.brewer.service.exception.SenhaObrigatoriaUsuarioException;
@@ -25,6 +27,9 @@ public class UsuariosController {
 	
 	@Autowired
 	private GrupoRepository grupoRepository;
+	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo(Usuario usuario) {
@@ -52,6 +57,15 @@ public class UsuariosController {
 		
 		redirectAttributes.addFlashAttribute("mensagem",  "Usuario cadastrado com sucesso!");		
 		return new ModelAndView("redirect:/usuarios/novo");
+	}
+	
+	@GetMapping
+	public ModelAndView pesquisar(Usuario usuario) {
+		ModelAndView mv = new ModelAndView("usuario/PesquisaUsuarios");
+		mv.addObject("grupos", grupoRepository.findAll());
+		mv.addObject("usuarios", usuarioRepository.findAll());
+		
+		return mv;
 	}
 	
 
