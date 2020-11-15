@@ -48,6 +48,7 @@ public class CervejasController {
 	@RequestMapping(value = "/novo", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, RedirectAttributes redirectAttributes) {		
 		if (result.hasErrors()) {
+			//throw new RuntimeException(); Simulando erro para pagina 500 erro no servidor
 			return novo(cerveja);
 		}		 
 		
