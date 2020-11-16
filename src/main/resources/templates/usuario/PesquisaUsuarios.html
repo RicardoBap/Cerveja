@@ -37,17 +37,17 @@
 
 	<div class="container-fluid">
 	
-		<form method="GET" th:object="${usuario}"  >
+		<form method="GET" th:object="${usuarioFilter}"  >
 		
 			<div class="row">
 				<div class="col-sm-6  form-group">
 					<label class="control-label" for="nome">Nome</label>
-					<input class="form-control" type="text" id="nome"  />
+					<input class="form-control" type="text" id="nome" th:field="*{nome}" />
 				</div>
 				
 				<div class="col-sm-6  form-group">
 					<label class="control-label" for="email">E-mail</label>
-					<input class="form-control" type="text" id="email"  >
+					<input class="form-control" type="text" id="email" th:field="*{email}" >
 				</div>
 			</div>
 			
@@ -57,8 +57,8 @@
 					<div>
 						<th:block th:each="grupo : ${grupos}" >
 							<div class="checkbox checkbox-inline">
-								<input th:id="|id_${grupo}|"  th:value="${grupo}" type="checkbox" > <!-- th:field="*{origem}" -->
-								<label th:for="|id_${grupo}|"  th:text="${grupo.nome}">Administrador</label> 							
+								<input type="checkbox" th:value="${grupo.codigo}" th:field="*{grupos}" > 
+								<label th:for="${#ids.prev('grupos')}"  th:text="${grupo.nome}">Administrador</label> 							
 							</div>
 						</th:block>											
 					</div>						
@@ -75,6 +75,7 @@
 					<tr>
 						<th class="table-usuario-col-nome">Nome</th>						
 						<th class="table-usuario-col-email">E-mail</th>
+						<th class="table-usuario-col-grupo">Grupo</th>
 						<th class="table-usuario-col-status">Status</th>						
 						<th class="table-usuario-col-acoes"></th>
 					</tr>			
@@ -83,7 +84,10 @@
 					<tr th:each="usuario : ${usuarios}">   <!-- ${cliente} | ${pagina.content}-->
 						<td th:text="${usuario.nome}">Admnin</td>
 						<td class="text-left" th:text="${usuario.email}">admin@mail.com</td>
-						<td class="text-left" th:text="${usuario.ativo}">ativo</td>						
+						<td class="text-left">
+							<span th:each="grupo : ${usuario.grupos}" th:text="|${grupo.nome}${grupoStat.last ? '' : ', '}|"></span>
+						</td>
+						<td class="text-left" th:text="${usuario.ativo} ? Ativo : Inativo">ativo</td>						
 						<td class="text-center">
 							<a class="btn  btn-link  btn-xs" title="Editar">
 								<i class="glyphicon  glyphicon-pencil"></i>

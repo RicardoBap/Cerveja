@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ricbap.brewer.model.Usuario;
 import com.ricbap.brewer.repository.GrupoRepository;
 import com.ricbap.brewer.repository.UsuarioRepository;
+import com.ricbap.brewer.repository.filter.UsuarioFilter;
 import com.ricbap.brewer.service.CadastroUsuarioService;
 import com.ricbap.brewer.service.exception.EmailUsuarioJaCadastradoException;
 import com.ricbap.brewer.service.exception.SenhaObrigatoriaUsuarioException;
@@ -60,10 +61,10 @@ public class UsuariosController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar(Usuario usuario) {
+	public ModelAndView pesquisar(UsuarioFilter usuarioFilter) {
 		ModelAndView mv = new ModelAndView("usuario/PesquisaUsuarios");
 		mv.addObject("grupos", grupoRepository.findAll());
-		mv.addObject("usuarios", usuarioRepository.findAll());
+		mv.addObject("usuarios", usuarioRepository.filtrar(usuarioFilter));
 		
 		return mv;
 	}
