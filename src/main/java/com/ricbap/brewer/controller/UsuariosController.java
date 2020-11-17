@@ -1,8 +1,11 @@
 package com.ricbap.brewer.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ricbap.brewer.controller.page.PageWrapper;
 import com.ricbap.brewer.model.Usuario;
 import com.ricbap.brewer.repository.GrupoRepository;
 import com.ricbap.brewer.repository.UsuarioRepository;
@@ -66,11 +70,15 @@ public class UsuariosController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar(UsuarioFilter usuarioFilter) {
+	public ModelAndView pesquisar(UsuarioFilter usuarioFilter,
+			@PageableDefault(size = 3) Pageable pageable, HttpServletRequest httpServletRequest) {
 		ModelAndView mv = new ModelAndView("usuario/PesquisaUsuarios");
 		mv.addObject("grupos", grupoRepository.findAll());
-		mv.addObject("usuarios", usuarioRepository.filtrar(usuarioFilter));
+		//mv.addObject("usuarios", usuarioRepository.filtrar(usuarioFilter));
 		
+		PageWrapper<Usuario> paginaWrapper = new PageWrapper<>(usuarioRepository.filtrar(usuarioFilter, pageable)
+				, httpServletRequest);		
+		mv.addObject("pagina", paginaWrapper);		
 		return mv;
 	}
 	
