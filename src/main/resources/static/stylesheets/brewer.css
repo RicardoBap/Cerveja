@@ -180,9 +180,16 @@
 
 /*
 ################################################
-#### PÁGINAS DO SISTEMA PESQUISA DE CERVEJA ####
+#### PÁGINAS DO SISTEMA PESQUISA DE USUARIOS ####
 ################################################
 */
+.botton-put-status {
+	margin-top: 30px;
+}
+
+.table-usuario-col-status {
+	width: 30px;	
+}
 
 .table-usuario-col-acoes {
 	width: 80px
