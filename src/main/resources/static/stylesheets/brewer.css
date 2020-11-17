@@ -188,7 +188,8 @@
 }
 
 .table-usuario-col-status {
-	width: 30px;	
+	width: 30px;
+	text-align: center;	
 }
 
 .table-usuario-col-acoes {
