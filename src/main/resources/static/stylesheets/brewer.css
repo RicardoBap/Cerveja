@@ -180,7 +180,7 @@
 
 /*
 ################################################
-#### PÁGINAS DO SISTEMA PESQUISA DE USUARIOS ####
+#### PÁGINAS DO SISTEMA PESQUISA DE USUARIOS ###
 ################################################
 */
 .botton-put-status {
@@ -195,3 +195,24 @@
 .table-usuario-col-acoes {
 	width: 80px
 }
+
+/*
+#####################################
+#### PÁGINAS DE CADASTRO DE VENDA ###
+#####################################
+*/
+.bw-tabela-cervejas {
+	margin-bottom: 15px;
+}
+
+.bw-tabela-cervejas__vazio {
+	padding: 15px 15px;
+	
+	border: 1px dashed #ddd;
+	
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: 300;
+	color: #555;
+}
+
