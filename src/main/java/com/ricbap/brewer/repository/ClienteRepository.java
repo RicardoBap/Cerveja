@@ -1,5 +1,6 @@
 package com.ricbap.brewer.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,5 +13,7 @@ import com.ricbap.brewer.repository.helper.cliente.ClienteRepositoryQuery;
 public interface ClienteRepository extends JpaRepository<Cliente, Long>, ClienteRepositoryQuery {
 
 	public Optional<Cliente> findByCpfCnpj(String codigo);
+
+	public List<Cliente> findByNomeStartingWithIgnoreCase(String nome);
 
 }
