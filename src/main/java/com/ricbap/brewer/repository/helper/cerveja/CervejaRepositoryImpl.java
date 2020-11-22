@@ -1,5 +1,7 @@
 package com.ricbap.brewer.repository.helper.cerveja;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.ricbap.brewer.dto.CervejaDTO;
 import com.ricbap.brewer.model.Cerveja;
 import com.ricbap.brewer.repository.filter.CervejaFilter;
 import com.ricbap.brewer.repository.paginacao.PaginacaoUtil;
@@ -84,6 +87,17 @@ public class CervejaRepositoryImpl implements CervejaRepositoryQuery {
 
 	private boolean isEstiloPresente(CervejaFilter filter) {
 		return filter.getEstilo() != null && filter.getEstilo().getCodigo() != null;
+	}
+
+
+	@Override
+	public List<CervejaDTO> porSkuOuNome(String skuOuNome) {
+		String jpql = "select new com.ricbap.brewer.dto.CervejaDTO(codigo, sku, nome, origem, valor, foto) "
+				+ "from Cerveja where lower(sku) like lower(:skuOuNome) or lower(nome) like lower(:skuOuNome)";
+		List<CervejaDTO> cervejasFiltradas = manager.createQuery(jpql, CervejaDTO.class)
+				.setParameter("SkuOuNome", skuOuNome + "%")
+				.getResultList();
+		return cervejasFiltradas;
 	}	
 
 }
