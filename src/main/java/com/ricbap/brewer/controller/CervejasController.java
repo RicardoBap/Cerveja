@@ -18,13 +18,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ricbap.brewer.controller.page.PageWrapper;
-import com.ricbap.brewer.dto.CervejaDTO;
 import com.ricbap.brewer.model.Cerveja;
 import com.ricbap.brewer.model.Origem;
 import com.ricbap.brewer.model.Sabor;
 import com.ricbap.brewer.repository.CervejaRepository;
 import com.ricbap.brewer.repository.EstiloRepository;
 import com.ricbap.brewer.repository.filter.CervejaFilter;
+import com.ricbap.brewer.repository.filter.CervejaSkuOuNomeFilter;
+import com.ricbap.brewer.repository.projection.ResumoCerveja;
 import com.ricbap.brewer.service.CadastroCervejaService;
 
 @Controller
@@ -91,8 +92,8 @@ public class CervejasController {
 	}
 	
 	@GetMapping("/filtro")
-	public @ResponseBody List<CervejaDTO> pesquisar(String skuOuNome) {
-		return cervejaRepository.porSkuOuNome(skuOuNome);
+	public @ResponseBody List<ResumoCerveja> pesquisar(CervejaSkuOuNomeFilter cervejaSkuOuNomeFilter) {
+		return cervejaRepository.porSkuOuNome(cervejaSkuOuNomeFilter);
 	}
 	
 	/*

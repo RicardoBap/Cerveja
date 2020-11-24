@@ -1,10 +1,10 @@
-package com.ricbap.brewer.dto;
+package com.ricbap.brewer.repository.projection;
 
 import java.math.BigDecimal;
 
 import com.ricbap.brewer.model.Origem;
 
-public class CervejaDTO {
+public class ResumoCerveja {
 	
 	private Long codigo;
 	private String sku;
@@ -14,7 +14,7 @@ public class CervejaDTO {
 	private String foto;
 	
 	
-	public CervejaDTO(Long codigo, String sku, String nome, Origem origem, BigDecimal valor, String foto) {
+	public ResumoCerveja(Long codigo, String sku, String nome, Origem origem, BigDecimal valor, String foto) {
 		this.codigo = codigo;
 		this.sku = sku;
 		this.nome = nome;
@@ -59,6 +59,6 @@ public class CervejaDTO {
 	}
 	public void setFoto(String foto) {
 		this.foto = foto;
-	}	
+	}
 
 }
