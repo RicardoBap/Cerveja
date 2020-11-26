@@ -128,6 +128,7 @@ public class CervejaRepositoryImpl implements CervejaRepositoryQuery {
 			predicates.add(builder.like(
 					builder.lower(root.get("sku")), "%" + cervejaSkuOuNomeFilter.getSku().toLowerCase() + "%"));
 		}
+		
 		if(!StringUtils.isEmpty(cervejaSkuOuNomeFilter.getNome())) {
 			predicates.add(builder.like(
 					builder.lower(root.get("nome")), "%" + cervejaSkuOuNomeFilter.getNome().toLowerCase() + "%"));

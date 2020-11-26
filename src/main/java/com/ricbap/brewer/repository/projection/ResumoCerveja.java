@@ -2,6 +2,8 @@ package com.ricbap.brewer.repository.projection;
 
 import java.math.BigDecimal;
 
+import org.springframework.util.StringUtils;
+
 import com.ricbap.brewer.model.Origem;
 
 public class ResumoCerveja {
@@ -20,7 +22,7 @@ public class ResumoCerveja {
 		this.nome = nome;
 		this.origem = origem.getDescricao();
 		this.valor = valor;
-		this.foto = foto;
+		this.foto = StringUtils.isEmpty(foto) ? "cerveja-mock.png" : foto;
 	}
 
 
