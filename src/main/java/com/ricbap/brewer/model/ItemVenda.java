@@ -10,6 +10,11 @@ public class ItemVenda {
 	private Cerveja cerveja;
 	
 	
+	public BigDecimal getValorTotal() {
+		return valorUnitario.multiply(new BigDecimal(quantidade));
+	}
+	
+	
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -33,12 +38,7 @@ public class ItemVenda {
 	}
 	public void setCerveja(Cerveja cerveja) {
 		this.cerveja = cerveja;
-	}
-	
-	
-	public BigDecimal getValorTotal() {
-		return valorUnitario.multiply(new BigDecimal(quantidade));
-	}
+	}	
 	
 	
 	@Override
