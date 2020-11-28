@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ricbap.brewer.model.Cerveja;
+import com.ricbap.brewer.session.TabelaItensVenda;
 
 public class TabelaItensVendaTest {
 	
