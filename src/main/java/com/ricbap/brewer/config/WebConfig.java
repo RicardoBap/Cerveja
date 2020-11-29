@@ -43,13 +43,13 @@ import com.ricbap.brewer.controller.converter.CidadeConverter;
 import com.ricbap.brewer.controller.converter.EstadoConverter;
 import com.ricbap.brewer.controller.converter.EstiloConverter;
 import com.ricbap.brewer.controller.converter.GrupoConverter;
-import com.ricbap.brewer.session.TabelaItensVenda;
+import com.ricbap.brewer.session.TabelaItensSession;
 import com.ricbap.brewer.thymeleaf.BrewerDialect;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
-@ComponentScan(basePackageClasses = { CervejasController.class, TabelaItensVenda.class }) //"com.ricbap.brewer.controller"
+@ComponentScan(basePackageClasses = { CervejasController.class, TabelaItensSession.class }) //"com.ricbap.brewer.controller"
 @EnableWebMvc
 @EnableSpringDataWebSupport
 @EnableCaching

@@ -1,8 +1,11 @@
 package com.ricbap.brewer.controller;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ricbap.brewer.model.Cerveja;
 import com.ricbap.brewer.repository.CervejaRepository;
-import com.ricbap.brewer.session.TabelaItensVenda;
+import com.ricbap.brewer.session.TabelaItensSession;
 
 @Controller
 @RequestMapping("/vendas")
@@ -21,37 +24,40 @@ public class VendasController {
 	private CervejaRepository cervejaRepository;
 	
 	@Autowired
-	private TabelaItensVenda tabelaItensVenda;
+	private TabelaItensSession tabelaItens;
 	
-	@RequestMapping("/nova")
-	public String nova() {		
-		return "venda/CadastroVenda";
+	@GetMapping("/nova")
+	public ModelAndView nova() {
+		ModelAndView mv = new ModelAndView("venda/CadastroVenda");
+		mv.addObject("uuid", UUID.randomUUID().toString());
+		return mv;
 	}
 	
 	@PostMapping("/item")
-	public ModelAndView adicionarItem(Long codigoCerveja) {
+	public ModelAndView adicionarItem(Long codigoCerveja, String uuid) {
 		Cerveja cerveja = cervejaRepository.findOne(codigoCerveja);
-		tabelaItensVenda.adicionarItem(cerveja, 1);
-		return mvTabelaItensVenda();
+		tabelaItens.adicionarItem(uuid, cerveja, 1);
+		return mvTabelaItensVenda(uuid);
 	}
 	
 	@PutMapping("/item/{codigoCerveja}")
-	public ModelAndView alterarQuantidadeItem(@PathVariable("codigoCerveja") Cerveja cerveja, Integer novaQuantidade) {
+	public ModelAndView alterarQuantidadeItem(@PathVariable("codigoCerveja") Cerveja cerveja, Integer quantidade,
+			String uuid) {
 		//Cerveja cerveja = cervejaRepository.findOne(codigoCerveja);
-		tabelaItensVenda.alterarQuantidadeDeItens(cerveja, novaQuantidade);
-		return mvTabelaItensVenda();
+		tabelaItens.alterarQuantidadeDeItens(uuid, cerveja, quantidade);
+		return mvTabelaItensVenda(uuid);
 	}
 	
-	@DeleteMapping("/item/{codigoCerveja}") 
-	public ModelAndView excluirItem(@PathVariable("codigoCerveja") Cerveja cerveja) {
+	@DeleteMapping("/item/{uuid}/{codigoCerveja}") 
+	public ModelAndView excluirItem(@PathVariable("codigoCerveja") Cerveja cerveja, @PathVariable String uuid) {
 		//Cerveja cerveja = cervejaRepository.findOne(codigoCerveja);
-		tabelaItensVenda.excluirItem(cerveja);
-		return mvTabelaItensVenda();
+		tabelaItens.excluirItem(uuid, cerveja);
+		return mvTabelaItensVenda(uuid);
 	}
 
-	private ModelAndView mvTabelaItensVenda() {
+	private ModelAndView mvTabelaItensVenda(String uuid) {
 		ModelAndView mv = new ModelAndView("venda/TabelaItensVenda");
-		mv.addObject("itens", tabelaItensVenda.getItens());		
+		mv.addObject("itens", tabelaItens.getItens(uuid));		
 		return mv;
 	}
 	
