@@ -18,11 +18,28 @@ Brewer.TabelaItens= (function() {
 				codigoCerveja: item.codigo
 			}
 		});
-		resposta.done(onItemAdicionadoNoServidor.bind(this));
+		resposta.done(onItemAtualizadoNoServidor.bind(this));
 	}
 	
-	function onItemAdicionadoNoServidor(html) {
+	function onItemAtualizadoNoServidor(html) {
 		this.tabelaCervejasContainer.html(html);
+		$('.js-tabela-cerveja-quantidade-item').on('change', onQuantidadeItensAlterado.bind(this));
+	}
+	
+	function onQuantidadeItensAlterado(evento) {
+		var input = $(evento.target);
+		var quantidade = input.val();
+		//console.log('novaQuantidade', quantidade)
+		var codigoCerveja = input.data('codigo-cerveja');
+		
+		var resposta = $.ajax({
+			url: 'item/' + codigoCerveja,
+			method: 'PUT',
+			data: {
+				novaQuantidade: quantidade
+			}
+		});
+		resposta.done(onItemAtualizadoNoServidor.bind(this));
 	}
 	
 	return TabelaItens;

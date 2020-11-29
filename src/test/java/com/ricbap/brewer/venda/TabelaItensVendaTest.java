@@ -1,6 +1,6 @@
 package com.ricbap.brewer.venda;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 
@@ -64,6 +64,19 @@ public class TabelaItensVendaTest {
 		
 		assertEquals(1, tabelaItensVenda.total());
 		assertEquals(new BigDecimal("9.00"), tabelaItensVenda.getValorTotal());
+	}
+	
+	@Test
+	public void deveAlterarQuantidadeDoItem() throws Exception {
+		Cerveja c1 = new Cerveja();
+		c1.setCodigo(1L);
+		c1.setValor(new BigDecimal("4.50"));
+		
+		tabelaItensVenda.adicionarItem(c1, 1);
+		tabelaItensVenda.alterarQuantidadeDeItens(c1, 3);
+		
+		assertEquals(1, tabelaItensVenda.total());
+		assertEquals(new BigDecimal("13.50"), tabelaItensVenda.getValorTotal());
 	}
 
 }
