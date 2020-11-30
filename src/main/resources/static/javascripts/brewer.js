@@ -100,7 +100,7 @@ Brewer.formatarMoeda = function(valor) {
 
 Brewer.recuperarValor = function(valorFormatado) {
 	numeral.locale('pt-br');
-	return numeral().unformat(valorFormatado);
+	return numeral().reset(valorFormatado);
 }
 
 $(function() {
