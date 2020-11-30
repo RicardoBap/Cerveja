@@ -17,6 +17,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.ricbap.brewer.model.Cerveja;
+import com.ricbap.brewer.model.Venda;
 import com.ricbap.brewer.repository.CervejaRepository;
 
 @Configuration

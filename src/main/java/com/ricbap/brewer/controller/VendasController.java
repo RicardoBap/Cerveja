@@ -3,6 +3,7 @@ package com.ricbap.brewer.controller;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ricbap.brewer.model.Cerveja;
+import com.ricbap.brewer.model.Venda;
 import com.ricbap.brewer.repository.CervejaRepository;
+import com.ricbap.brewer.security.UsuarioSistema;
+import com.ricbap.brewer.service.CadastroVendaService;
 import com.ricbap.brewer.session.TabelaItensSession;
 
 @Controller
@@ -24,13 +29,29 @@ public class VendasController {
 	private CervejaRepository cervejaRepository;
 	
 	@Autowired
+	private CadastroVendaService cadastroVendaService;
+	
+	@Autowired
 	private TabelaItensSession tabelaItens;
 	
 	@GetMapping("/nova")
-	public ModelAndView nova() {
+	public ModelAndView nova(Venda venda) {
 		ModelAndView mv = new ModelAndView("venda/CadastroVenda");
-		mv.addObject("uuid", UUID.randomUUID().toString());
+		venda.setUuid(UUID.randomUUID().toString());
 		return mv;
+	}
+	
+	@PostMapping("/nova")
+	public ModelAndView salvar(Venda venda, RedirectAttributes redirectAttributes, 
+			@AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+		
+		venda.setUsuario(usuarioSistema.getUsuario());
+		//venda.setItens(tabelaItens.getItens(venda.getUuid()));
+		venda.adicionarItens(tabelaItens.getItens(venda.getUuid()));
+		
+		cadastroVendaService.cadastrar(venda);
+		redirectAttributes.addFlashAttribute("mensagem", "Venda salva com sucesso");
+		return new ModelAndView("redirect:/vendas/nova");
 	}
 	
 	@PostMapping("/item")
