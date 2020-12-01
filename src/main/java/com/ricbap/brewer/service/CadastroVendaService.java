@@ -1,14 +1,12 @@
 package com.ricbap.brewer.service;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ricbap.brewer.model.ItemVenda;
 import com.ricbap.brewer.model.Venda;
 import com.ricbap.brewer.repository.VendaRepository;
 
@@ -25,27 +23,30 @@ public class CadastroVendaService {
 			venda.setDataCriacao(LocalDateTime.now());
 		}
 		
-		BigDecimal valorTotalItens = venda.getItens().stream()
-				.map(ItemVenda::getValorTotal)
-				.reduce(BigDecimal::add)
-				.get();
-		
-		BigDecimal valorTotal = calcularValorTotal(valorTotalItens, venda.getValorFrete(), venda.getValorDesconto());		
-		venda.setValorTotal(valorTotal);
+		/*
+		 * BigDecimal valorTotalItens = venda.getItens().stream()
+		 * .map(ItemVenda::getValorTotal) .reduce(BigDecimal::add) .get();
+		 * 
+		 * BigDecimal valorTotal = calcularValorTotal(valorTotalItens,
+		 * venda.getValorFrete(), venda.getValorDesconto());
+		 * venda.setValorTotal(valorTotal);
+		 */
 		
 		if(venda.getDataEntrega() != null) {
-			venda.setDataHoraEntrega(LocalDateTime.of(venda.getDataEntrega(), venda.getHoraEntrega()));
+			venda.setDataHoraEntrega(LocalDateTime.of(venda.getDataEntrega(),
+					venda.getHoraEntrega() != null ? venda.getHoraEntrega() : LocalTime.NOON));
 		}
 				
 		vendaRepository.save(venda);
 	}
 
-	private BigDecimal calcularValorTotal(BigDecimal valorTotalItens, BigDecimal valorFrete, BigDecimal valorDesconto) {
-		BigDecimal valorTotal = valorTotalItens
-				.add(Optional.ofNullable(valorFrete).orElse(BigDecimal.ZERO))
-				.subtract(Optional.ofNullable(valorDesconto).orElse(BigDecimal.ZERO));
-		return valorTotal;
-	}
+	/*
+	 * private BigDecimal calcularValorTotal(BigDecimal valorTotalItens, BigDecimal
+	 * valorFrete, BigDecimal valorDesconto) { BigDecimal valorTotal =
+	 * valorTotalItens .add(Optional.ofNullable(valorFrete).orElse(BigDecimal.ZERO))
+	 * .subtract(Optional.ofNullable(valorDesconto).orElse(BigDecimal.ZERO)); return
+	 * valorTotal; }
+	 */
 }
 
 

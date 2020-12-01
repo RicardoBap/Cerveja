@@ -100,7 +100,7 @@ Brewer.formatarMoeda = function(valor) {
 
 Brewer.recuperarValor = function(valorFormatado) {
 	numeral.locale('pt-br');
-	return numeral().reset(valorFormatado);
+	return numeral(valorFormatado).format('0.0 [0000]');
 }
 
 $(function() {
@@ -117,7 +117,7 @@ $(function() {
 	maskDate.enable();
 	
 	var security = new Brewer.Security();
-	security.enable();
+	security.enable();	
 })
 
 
