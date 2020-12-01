@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ricbap.brewer.model.StatusVenda;
 import com.ricbap.brewer.model.Venda;
 import com.ricbap.brewer.repository.VendaRepository;
 
@@ -18,7 +19,7 @@ public class CadastroVendaService {
 	private VendaRepository vendaRepository;
 
 	@Transactional
-	public void cadastrar(Venda venda) {
+	public void salvar(Venda venda) {
 		if(venda.isNova()) {
 			venda.setDataCriacao(LocalDateTime.now());
 		}
@@ -38,6 +39,13 @@ public class CadastroVendaService {
 		}
 				
 		vendaRepository.save(venda);
+	}
+
+	
+	@Transactional
+	public void emitir(Venda venda) {
+		venda.setStatus(StatusVenda.EMITIDA);
+		salvar(venda);
 	}
 
 	/*
