@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ricbap.brewer.controller.page.PageWrapper;
 import com.ricbap.brewer.controller.validator.VendaValidator;
+import com.ricbap.brewer.mail.Mailer;
 import com.ricbap.brewer.model.Cerveja;
 import com.ricbap.brewer.model.StatusVenda;
 import com.ricbap.brewer.model.TipoPessoa;
@@ -53,6 +54,9 @@ public class VendasController {
 	
 	@Autowired
 	private VendaRepository vendaRepository;
+	
+	@Autowired
+	private Mailer mailer;
 	
 	@InitBinder("venda")
 	public void inicializarValidador(WebDataBinder binder) {
@@ -110,22 +114,26 @@ public class VendasController {
 	}
 	
 	
-	/*
-	 * @PostMapping(value = "/nova", params = "enviarEmail") public ModelAndView
-	 * enviarEmail(Venda venda, BindingResult result, RedirectAttributes
-	 * redirectAttributes,
-	 * 
-	 * @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
-	 * 
-	 * validarVenda(venda, result); if(result.hasErrors()) { return nova(venda); }
-	 * 
-	 * venda.setUsuario(usuarioSistema.getUsuario());
-	 * 
-	 * cadastroVendaService.cadastrar(venda);
-	 * redirectAttributes.addFlashAttribute("mensagem",
-	 * "Venda salva e e-mail enviado"); return new
-	 * ModelAndView("redirect:/vendas/nova"); }
-	 */
+	@PostMapping(value = "/nova", params = "enviarEmail") 
+	public ModelAndView enviarEmail(Venda venda, BindingResult result, RedirectAttributes redirectAttributes,
+			@AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+		
+		validarVenda(venda, result);
+		if(result.hasErrors()) { 
+			return nova(venda); 
+		}
+		  
+		venda.setUsuario(usuarioSistema.getUsuario());
+	  
+		cadastroVendaService.salvar(venda);
+		mailer.enviar(venda);
+		System.out.println("###### Logo depois da chamada do método enviar");
+		
+		redirectAttributes.addFlashAttribute("mensagem", "Venda salva e e-mail enviado"); 
+		  
+		return new ModelAndView("redirect:/vendas/nova");
+	}
+	 
 	
 	
 	@PostMapping("/item")
