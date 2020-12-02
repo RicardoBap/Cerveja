@@ -119,6 +119,12 @@ public class FotoStorageLocal implements FotoStorage {
 			throw new RuntimeException("Erro gerando thumbnail", e);
 		}
 	}
+
+
+	@Override
+	public byte[] recuperarThumbnail(String fotoCerveja) {		
+		return recuperar("thumbnail." + fotoCerveja);
+	}	
 	
 
 }

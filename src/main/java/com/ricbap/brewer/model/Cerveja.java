@@ -94,6 +94,12 @@ public class Cerveja {
 		return !StringUtils.isEmpty(foto) ? foto : "cerveja-mock.png";
 	}
 	
+	
+	// Coloca a silhueta no email
+	public boolean temFoto() {
+		return !StringUtils.isEmpty(this.foto);
+	}
+	
 
 	public Long getCodigo() {
 		return codigo;
