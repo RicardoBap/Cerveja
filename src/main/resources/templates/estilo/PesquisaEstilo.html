@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      
+      layout:decorate="~{layout/LayoutPadrao}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="'layout/LayoutPadrao'" >
+      xmlns:data="http://www.thymeleaf.org/extras/data" >
        
 <head>
 	<title>Pesquisa de estilo</title>	
@@ -79,10 +79,13 @@
 						<td class="text-center" th:text="${estilo.codigo}">Código</td>
 						<td th:text="${estilo.nome}">Nome</td>
 						<td class="text-center">
-							<a class="btn  btn-link  btn-xs" title="Editar">
+							<a class="btn  btn-link  btn-xs" title="Editar"
+								th:href="@{/estilos/{codigo}(codigo=${estilo.codigo})}" >
 								<i class="glyphicon  glyphicon-pencil"></i>
 							</a>
-							<a class="btn  btn-link  btn-xs" title="Excluir">
+							<a class="btn  btn-link  btn-xs  js-exclusao-btn" title="Excluir"
+								data:url="@{/estilos/{codigo}(codigo=${estilo.codigo})}"
+								data:objeto="${estilo.nome}" >
 								<i class="glyphicon  glyphicon-remove"></i>
 							</a>
 						</td>

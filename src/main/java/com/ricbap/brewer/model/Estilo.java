@@ -31,6 +31,11 @@ public class Estilo implements Serializable {
 	private List<Cerveja> cervejas;	
 	
 	
+	public boolean isNovo() {
+		return codigo == null;
+	}
+	
+	
 	public Long getCodigo() {
 		return codigo;
 	}

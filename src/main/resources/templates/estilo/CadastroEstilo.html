@@ -11,13 +11,14 @@
 
 <body>
 
-<section class="aw-layout-content  js-content" layout:fragment="conteudo" th:action="@{estilos/novo}">
+<section class="aw-layout-content  js-content" layout:fragment="conteudo"  >
 
 	<div class="page-header">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-10">
-					<h1>Cadastro de estilo</h1>					
+					<h1 th:if="${estilo.novo}">Cadastro de estilo</h1>
+					<h1 th:unless="${estilo.novo}"	th:text="|Edição de ${estilo.nome}|">Edição de estilo</h1>				
 				</div>
 				
 				<div class="col-xs-2">
@@ -37,9 +38,12 @@
 	
 		<th:block th:include="fragments/MensagemSucesso"></th:block>		
 
-		<form method="POST" th:object="${estilo}"  class="form-vertical  js-form-loading">			
+		<form method="POST" th:object="${estilo}"  class="form-vertical  js-form-loading" 
+			th:action="${estilo.novo} ? @{/estilos/novo} : @{/estilos/{codigo}(codigo=${estilo.codigo})}" >				
 			
-			<th:block th:include="fragments/MensagensErrosValidacao"></th:block>
+			<th:block th:include="fragments/MensagensErrosValidacao"></th:block>			
+			
+			<input type="hidden" th:field="*{codigo}" >
 						
 			<div class="row">				
 				<div class="col-sm-12  form-group  bw-required" th:classappend="${#fields.hasErrors('nome')} ? has-error" >						
