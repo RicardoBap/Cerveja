@@ -46,8 +46,8 @@ public class CervejasController {
 	@Autowired
 	private CervejaRepository cervejaRepository;
 	
-	@RequestMapping("/novo")
-	public ModelAndView novo(Cerveja cerveja) {
+	@RequestMapping("/nova")
+	public ModelAndView nova(Cerveja cerveja) {
 		ModelAndView mv = new ModelAndView("cerveja/CadastroCerveja");
 		mv.addObject("sabores", Sabor.values()); // <-----	 enum
 		mv.addObject("estilos", estiloRepository.findAll()); // <------ classe
@@ -55,17 +55,17 @@ public class CervejasController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/novo", method = RequestMethod.POST)
-	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, RedirectAttributes redirectAttributes) {		
+	@RequestMapping(value = { "/nova", "{\\d+}" }, method = RequestMethod.POST)
+	public ModelAndView salvar(@Valid Cerveja cerveja, BindingResult result, RedirectAttributes redirectAttributes) {		
 		if (result.hasErrors()) {
 			//throw new RuntimeException(); Simulando erro para pagina 500 erro no servidor
-			return novo(cerveja);
+			return nova(cerveja);
 		}		 
 		
 		// Salvar no banco de dados
 		cadastroCervejaService.salvar(cerveja);
 		redirectAttributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso");		
-		return new ModelAndView("redirect:/cervejas/novo");
+		return new ModelAndView("redirect:/cervejas/nova");
 	}
 	
 	@GetMapping
@@ -109,6 +109,13 @@ public class CervejasController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 		return ResponseEntity.ok().build(); // 200
+	}
+	
+	@GetMapping("/{codigo}")
+	public ModelAndView editar(@PathVariable("codigo") Cerveja cerveja) {
+		ModelAndView mv = nova(cerveja);
+		mv.addObject(cerveja);
+		return mv;
 	}
 	
 	/*

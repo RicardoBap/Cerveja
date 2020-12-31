@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
@@ -73,13 +74,17 @@ public class Cerveja {
 	@NotNull(message = "O estilo é obrigatório")
 	@ManyToOne
 	@JoinColumn(name = "codigo_estilo")
-	private Estilo estilo;
-	
+	private Estilo estilo;	
 	
 	private String foto;
 	
 	@Column(name = "content_type")
 	private String contentType;
+	
+		
+	// Para salvar foto e atualizar
+	@Transient
+	private boolean novaFoto;
 	
 	
 	// Call backs do JPA
@@ -89,15 +94,20 @@ public class Cerveja {
 		sku = sku.toUpperCase();
 	}
 	
-	// Coloca silhueta da garrafa se não houver foto
+	// Coloca silhueta(Mock) da garrafa se não houver foto
 	public String getFotoOuMock() {
 		return !StringUtils.isEmpty(foto) ? foto : "cerveja-mock.png";
 	}
 	
 	
-	// Coloca a silhueta no email
+	// Coloca a silhueta(Mock) no email
 	public boolean temFoto() {
 		return !StringUtils.isEmpty(this.foto);
+	}
+	
+	// Para Atualização de Cerveja significa que é uma cerveja nova
+	public boolean isNova() {
+		return codigo == null;
 	}
 	
 
@@ -181,6 +191,14 @@ public class Cerveja {
 	}
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
+	}
+	
+	
+	public boolean isNovaFoto() {
+		return novaFoto;
+	}
+	public void setNovaFoto(boolean novaFoto) {
+		this.novaFoto = novaFoto;
 	}
 	
 
