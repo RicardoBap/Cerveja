@@ -10,5 +10,7 @@ import com.ricbap.brewer.repository.filter.VendaFilter;
 public interface VendaRepositoryQuery {
 	
 	public Page<Venda> filtrar(VendaFilter filtro, Pageable pageable);
+	
+	public Venda buscarComItens(Long codigo);
 
 }
