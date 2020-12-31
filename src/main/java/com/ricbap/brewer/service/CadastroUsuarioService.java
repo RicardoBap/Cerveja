@@ -2,6 +2,8 @@ package com.ricbap.brewer.service;
 
 import java.util.Optional;
 
+import javax.persistence.PersistenceException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import org.springframework.util.StringUtils;
 import com.ricbap.brewer.model.Usuario;
 import com.ricbap.brewer.repository.UsuarioRepository;
 import com.ricbap.brewer.service.exception.EmailUsuarioJaCadastradoException;
+import com.ricbap.brewer.service.exception.ImpossivelExcluirEntidadeException;
 import com.ricbap.brewer.service.exception.SenhaObrigatoriaUsuarioException;
 
 @Service
@@ -52,6 +55,17 @@ public class CadastroUsuarioService {
 	@Transactional
 	public void alterarStatus(Long[] codigos, StatusUsuario statusUsuario) {
 		statusUsuario.executar(codigos, usuarioRepository);
+	}
+	
+	
+	@Transactional
+	public void excluir(Usuario usuario) {
+		try {
+			this.usuarioRepository.delete(usuario);
+			this.usuarioRepository.flush();
+		} catch (PersistenceException e) {
+			throw new ImpossivelExcluirEntidadeException("Impossível apagar usuário.");
+		}
 	}
 	
 	
