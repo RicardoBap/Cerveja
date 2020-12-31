@@ -16,5 +16,7 @@ public interface UsuarioRepositoryQuery {
 	public List<String> permissoes(Usuario usuario);
 	
 	public Page<Usuario> filtrar(UsuarioFilter filter, Pageable pageable);
+	
+	public Usuario buscarComGrupos(Long codigo);
 
 }
