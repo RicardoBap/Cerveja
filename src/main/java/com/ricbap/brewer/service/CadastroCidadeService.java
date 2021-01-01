@@ -25,5 +25,5 @@ public class CadastroCidadeService {
 		
 		cidadeRepository.save(cidade);
 	}
-
+	
 }

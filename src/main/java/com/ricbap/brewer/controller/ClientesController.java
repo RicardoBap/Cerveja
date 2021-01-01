@@ -13,8 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +31,7 @@ import com.ricbap.brewer.repository.EstadoRepository;
 import com.ricbap.brewer.repository.filter.ClienteFilter;
 import com.ricbap.brewer.service.CadastroClienteService;
 import com.ricbap.brewer.service.exception.CpfCnpjClienteCadastradoException;
+import com.ricbap.brewer.service.exception.ImpossivelExcluirEntidadeException;
 
 @Controller
 @RequestMapping("/clientes")
@@ -51,7 +54,7 @@ public class ClientesController {
 		return mv;
 	}
 	
-	@PostMapping("/novo")
+	@PostMapping({"/novo", "{\\d+}"})
 	public ModelAndView salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			return novo(cliente);
@@ -69,7 +72,7 @@ public class ClientesController {
 	
 	@GetMapping
 	public ModelAndView pesquisar(ClienteFilter clienteFilter,
-			@PageableDefault(size = 2) Pageable pageable, HttpServletRequest httpServletRequest) {
+			@PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
 		ModelAndView mv = new ModelAndView("cliente/PesquisaClientes");
 		
 		//System.out.println(">>>>>pageNumber " + pageable.getPageNumber());
@@ -88,12 +91,32 @@ public class ClientesController {
 		validarTamanhoNome(nome);
 		return clienteRepository.findByNomeStartingWithIgnoreCase(nome);
 	}
+	
+	@GetMapping("/{codigo}")
+	public ModelAndView editar(@PathVariable("codigo") Cliente cliente) {
+		ModelAndView mv = novo(cliente);
+		mv.addObject(cliente);
+		return mv;
+	}
+	
+	@DeleteMapping("/{codigo}")
+	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Cliente cliente) {
+		try {
+			cadastroClienteService.excluir(cliente);
+		} catch(ImpossivelExcluirEntidadeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		return ResponseEntity.ok().build(); // 200
+	}
+	
+	
 
 	private void validarTamanhoNome(String nome) {
 		if(StringUtils.isEmpty(nome) || nome.length() < 3) {
 			throw new IllegalArgumentException();
 		}
 	}
+		
 	
 	@ExceptionHandler(IllegalArgumentException.class)
 	public ResponseEntity<Void> tratarIllegalArgumentException(IllegalArgumentException e) {

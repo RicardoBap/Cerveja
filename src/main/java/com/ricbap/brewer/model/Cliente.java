@@ -75,6 +75,10 @@ public class Cliente implements Serializable {
 	public String getCpfCnpjSemFormatacao() {
 		return TipoPessoa.removerFormatacao(this.cpfCnpj);
 	}
+	
+	public boolean isNovo() {
+		return codigo == null;
+	}
 
 	public Long getCodigo() {
 		return codigo;
