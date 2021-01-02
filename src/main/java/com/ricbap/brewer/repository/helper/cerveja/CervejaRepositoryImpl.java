@@ -23,6 +23,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.ricbap.brewer.dto.ValorItensEstoque;
 import com.ricbap.brewer.model.Cerveja;
 import com.ricbap.brewer.model.Cerveja_;
 import com.ricbap.brewer.repository.filter.CervejaFilter;
@@ -38,6 +39,13 @@ public class CervejaRepositoryImpl implements CervejaRepositoryQuery {
 	@Autowired
 	private PaginacaoUtil paginacaoUtil;
 	
+	// DASHBOARD
+	@Override
+	public ValorItensEstoque valorItensEstoque() {
+		String query = "select new com.ricbap.brewer.dto.ValorItensEstoque(sum(valor * quantidadeEstoque), sum(quantidadeEstoque)) from Cerveja";
+		return manager.createQuery(query, ValorItensEstoque.class).getSingleResult();
+	} 
+		
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
@@ -134,7 +142,7 @@ public class CervejaRepositoryImpl implements CervejaRepositoryQuery {
 					builder.lower(root.get("nome")), "%" + cervejaSkuOuNomeFilter.getNome().toLowerCase() + "%"));
 		}
 		return predicates.toArray(new Predicate[predicates.size()]);
-	} 	
+	}		
 
 }
 
