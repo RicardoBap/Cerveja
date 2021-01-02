@@ -1,5 +1,6 @@
 package com.ricbap.brewer.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +21,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ricbap.brewer.controller.page.PageWrapper;
 import com.ricbap.brewer.controller.validator.VendaValidator;
+import com.ricbap.brewer.dto.VendaMes;
 import com.ricbap.brewer.mail.Mailer;
 import com.ricbap.brewer.model.Cerveja;
 import com.ricbap.brewer.model.ItemVenda;
@@ -201,6 +204,12 @@ public class VendasController {
 		return new ModelAndView("redirect:/vendas/" + venda.getCodigo());
 	}
 	
+	// Grafico por mes
+	@GetMapping("/totalPorMes")
+	public @ResponseBody List<VendaMes> listarTotalVendaPorMes() {
+		return vendaRepository.totalPorMes();
+	}
+	
 
 	private void setUuid(Venda venda) {
 		if(StringUtils.isEmpty(venda.getUuid())) {
@@ -221,6 +230,7 @@ public class VendasController {
 
 		vendaValidator.validate(venda, result);
 	}
+	
 	
 
 }

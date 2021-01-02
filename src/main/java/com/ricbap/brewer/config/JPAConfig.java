@@ -17,7 +17,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.ricbap.brewer.model.Cerveja;
-import com.ricbap.brewer.model.Venda;
 import com.ricbap.brewer.repository.CervejaRepository;
 
 @Configuration
@@ -48,6 +47,7 @@ public class JPAConfig {
 		factory.setDataSource(dataSource);
 		factory.setJpaVendorAdapter(jpaVendorAdapter);
 		factory.setPackagesToScan(Cerveja.class.getPackage().getName());
+		factory.setMappingResources("sql/consultas-nativas.xml");
 		factory.afterPropertiesSet(); 
 		return factory.getObject(); 
 	}	
