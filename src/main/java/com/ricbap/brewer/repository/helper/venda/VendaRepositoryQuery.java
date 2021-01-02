@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.ricbap.brewer.dto.VendaMes;
+import com.ricbap.brewer.dto.VendaOrigem;
 import com.ricbap.brewer.model.Venda;
 import com.ricbap.brewer.repository.filter.VendaFilter;
 
@@ -23,8 +24,10 @@ public interface VendaRepositoryQuery {
 	public BigDecimal valorTotalNoMes();
 	public BigDecimal valorTicketMedioNoAno();
 	
-	//GRAFICO VENDAS POR MES - DTO(VendasMes) - SQL(Nativo-Aeq	uivo XML)
+	//GRAFICO VENDAS POR MES - DTO(VendasMes) - SQL(Nativo-Arquivo XML)
 	public List<VendaMes> totalPorMes();
 	
-	
+	//GRAFICO VENDA TOTAL POR ORIGEM - DTO(VendasMes) - SQL(Nativo-Arquivo XML)
+	public List<VendaOrigem> totalPorOrigem();
+		
 }

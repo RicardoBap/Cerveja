@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ricbap.brewer.controller.page.PageWrapper;
 import com.ricbap.brewer.controller.validator.VendaValidator;
 import com.ricbap.brewer.dto.VendaMes;
+import com.ricbap.brewer.dto.VendaOrigem;
 import com.ricbap.brewer.mail.Mailer;
 import com.ricbap.brewer.model.Cerveja;
 import com.ricbap.brewer.model.ItemVenda;
@@ -208,6 +209,12 @@ public class VendasController {
 	@GetMapping("/totalPorMes")
 	public @ResponseBody List<VendaMes> listarTotalVendaPorMes() {
 		return vendaRepository.totalPorMes();
+	}
+	
+	// Grafico por origem
+	@GetMapping("/porOrigem")
+	public @ResponseBody List<VendaOrigem> vendasPorNacionalidade() {
+		return this.vendaRepository.totalPorOrigem();
 	}
 	
 

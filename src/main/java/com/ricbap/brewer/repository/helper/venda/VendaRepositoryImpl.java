@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.ricbap.brewer.dto.VendaMes;
+import com.ricbap.brewer.dto.VendaOrigem;
 import com.ricbap.brewer.model.StatusVenda;
 import com.ricbap.brewer.model.TipoPessoa;
 import com.ricbap.brewer.model.Venda;
@@ -49,7 +50,7 @@ public class VendaRepositoryImpl implements VendaRepositoryQuery {
 					.setParameter("status", StatusVenda.EMITIDA)
 					.getSingleResult());
 		return optional.orElse(BigDecimal.ZERO);
-	}
+	}	
 	
 	@Override
 	public BigDecimal valorTotalNoMes() {
@@ -82,12 +83,30 @@ public class VendaRepositoryImpl implements VendaRepositoryQuery {
 			String mesIdeal = String.format("%d/%02d", hoje.getYear(), hoje.getMonthValue());
 			
 			boolean possuiMes = vendasMes.stream().filter(v -> v.getMes().equals(mesIdeal)).findAny().isPresent();
-			if(possuiMes) {
+			if(!possuiMes) {
 				vendasMes.add(i - 1, new VendaMes(mesIdeal, 0));
 			}
 			hoje = hoje.minusMonths(1);
 		}		
 		return vendasMes;
+	}
+	
+	// GRAFICO TOTAL POR ORIGEM
+	@Override
+	public List<VendaOrigem> totalPorOrigem() {
+		List<VendaOrigem> vendasNacionalidade = manager.createNamedQuery("Vendas.porOrigem", VendaOrigem.class).getResultList();
+		
+		LocalDate now = LocalDate.now();
+		for (int i = 1; i <= 6; i++) {
+			String mesIdeal = String.format("%d/%02d", now.getYear(), now.getMonth().getValue());
+			
+			boolean possuiMes = vendasNacionalidade.stream().filter(v -> v.getMes().equals(mesIdeal)).findAny().isPresent();
+			if (!possuiMes) {
+				vendasNacionalidade.add(i - 1, new VendaOrigem(mesIdeal, 0, 0));
+			}			
+			now = now.minusMonths(1);
+		}		
+		return vendasNacionalidade;
 	}
 	
 	
