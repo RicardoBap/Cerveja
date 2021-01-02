@@ -2,7 +2,6 @@ package com.ricbap.brewer.config;
 
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.BeansException;
@@ -23,12 +22,10 @@ import org.springframework.format.number.NumberStyleFormatter;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.i18n.FixedLocaleResolver;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -110,11 +107,14 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		
 		//Formata números decimais
 		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
+		//BigDecimalFormatter bigDecimalFormatter = new BigDecimalFormatter("#,##0.00");
 		conversionService.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);
 		
 		//Formata número inteiros
 		NumberStyleFormatter integerFormatter = new NumberStyleFormatter("#,##0");
 		conversionService.addFormatterForFieldType(Integer.class, integerFormatter);
+		//BigDecimalFormatter integerFormatter = new BigDecimalFormatter("#,##0");
+		//conversionService.addFormatterForFieldType(BigDecimal.class, integerFormatter);
 		
 		//API de Datas a partir do Java 8
 		DateTimeFormatterRegistrar dateTimeFormater = new DateTimeFormatterRegistrar();
@@ -125,10 +125,13 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		return conversionService;
 	}
 	
+	
+	/* INTERNACIONALIZAÇÃO - força sempre o idioma Brasil - formatação numerica
 	@Bean
-	public LocaleResolver localeResolver() {
-		return new FixedLocaleResolver(new Locale("pt", "BR"));
-	}
+	public LocaleResolver localeResolver() { 
+		return new FixedLocaleResolver(new Locale("pt", "BR")); 
+	} */
+	 
 	
 	@Bean
 	public CacheManager cacheManager() {
