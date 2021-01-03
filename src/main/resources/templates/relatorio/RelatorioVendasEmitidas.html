@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/LayoutPadrao}" >
+       
+<head>
+	<title>Relatório - Vendas emitidas</title>
+</head> 
+
+<section layout:fragment="conteudo" >
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Relatório - Vendas emitidas</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" >
+							<i class="glyphicon glyphicon-search">
+								<span class="hidden-xs  hidden-sm">Pesquisar</span>
+							</i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="container-fluid">		
+
+		<form method="POST" th:object="${periodoRelatorio}" class="form-vertical  js-form-loading" 
+			th:action="@{/relatorios/vendasEmitidas}">	
+			
+			<!-- <th:block th:include="fragments/MensagensErroValidacao"></th:block>	 -->			
+		
+			<div class="row">
+				<div class="col-sm-12  form-group"  > 			
+					<label  for="dataInicio" class="control-label">Data de criação</label>
+					<div class="form-inline">
+						<input id="dataInicio" type="text" class="form-control  aw-form-inline-sm  js-date" 
+							autocomplete="off" th:field="*{dataInicio}" />
+						<label  for="a" class="aw-form-label-between">a</label>	
+						<input id="dataFim" type="text" class="form-control  aw-form-inline-sm  js-date"
+							autocomplete="off" th:field="*{dataFim}" />
+					</div>					
+				</div>			
+			</div>						
+		
+			<button class="btn  btn-primary" type="submit">Emitir</button>					
+			
+		</form>		
+		
+	</div>
+
+</section>
+
+</html>
