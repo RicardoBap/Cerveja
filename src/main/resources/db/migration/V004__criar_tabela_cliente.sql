@@ -9,6 +9,6 @@ CREATE TABLE cliente (
 	numero VARCHAR(15),
 	complemento VARCHAR(20),
 	cep VARCHAR(15),
-	codigo_cidade BIGINT(20),
+	codigo_cidade BIGINT,
 	FOREIGN KEY (codigo_cidade) REFERENCES cidade(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

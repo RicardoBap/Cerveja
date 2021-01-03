@@ -1,5 +1,5 @@
 INSERT INTO usuario (nome, email, senha, ativo) 
-VALUES ('Admin', 'admin@mail.com', '$2a$10$I/h7rbVK/MeNA13OyDpR7O5Xw.99woc/Hxxpx/Ck3rl/1rtCaCn76', 1);
+VALUES ('Administrador', 'ric_bap@hotmail.com', '$2a$10$dFVHGmfxbS4oUwG0tP8Kr.IOn49lCnxq4ew78yflqDrAcqMF8vB.2', 1);
 
 INSERT INTO usuario (nome, email, senha, ativo) 
-VALUES ('Maria Pereira', 'maria@mail.com', '$2a$10$7jUmQJavfVsWF2qiRSr.4.T9BR3QBlASJGJbpD3p6jPTB6ykmpqfe', 1);
+VALUES ('Heloisa', 'heloisa.ciulla@gmail.com', '$2a$10$H6EpvCTAwqih50.OenTV9uO1yqsG0kPmfYMD25ujEdcQDiKh5NMZe', 1);
