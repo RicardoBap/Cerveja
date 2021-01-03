@@ -9,6 +9,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import com.ricbap.brewer.config.JPAConfig;
 import com.ricbap.brewer.config.MailConfig;
+import com.ricbap.brewer.config.S3Config;
 import com.ricbap.brewer.config.SecurityConfig;
 import com.ricbap.brewer.config.ServiceConfig;
 import com.ricbap.brewer.config.WebConfig;
@@ -17,7 +18,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] { JPAConfig.class, ServiceConfig.class, SecurityConfig.class };
+		return new Class<?>[] { JPAConfig.class, ServiceConfig.class, SecurityConfig.class, S3Config.class };
 	}
 
 	@Override

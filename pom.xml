@@ -80,6 +80,9 @@
 		<jasperreports.version>6.6.0</jasperreports.version>
 		<!-- JASPER REPORTS FONTS -->
 		<jasperreports.fonts.version>6.0.0</jasperreports.fonts.version>
+		
+		<!-- AWD SDK - S3 -->
+		<aws-java-sdk-s3.version>1.10.77</aws-java-sdk-s3.version>
 	
 	</properties>
 	
@@ -330,6 +333,13 @@
 			<artifactId>jasperreports-fonts</artifactId>
 			<version>${jasperreports.fonts.version}</version>
 			<scope>compile</scope>
+		</dependency>
+		
+		<!-- AWS SDK- S3 -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+			<version>${aws-java-sdk-s3.version}</version>
 		</dependency>
 
 	</dependencies>
