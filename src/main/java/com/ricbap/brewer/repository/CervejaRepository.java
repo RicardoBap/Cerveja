@@ -8,6 +8,6 @@ import com.ricbap.brewer.repository.helper.cerveja.CervejaRepositoryQuery;
 
 @Repository
 public interface CervejaRepository extends JpaRepository<Cerveja, Long>, CervejaRepositoryQuery {
-	
-	
+
+		
 }

@@ -25,7 +25,7 @@ public class MailConfig {
 	@Bean
 	public JavaMailSender mailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-		mailSender.setHost("smtp.gmail.com");
+		mailSender.setHost("smtp.gmail.com");  // smtp.gmail.com   smtp.sendgrid.com
 		mailSender.setPort(587);
 		mailSender.setUsername(env.getProperty("mail.username")); //"ricbapdevs@gmail.com"
 		mailSender.setPassword(env.getProperty("mail.password"));		
@@ -34,7 +34,7 @@ public class MailConfig {
 		System.out.println(">>> password: " + env.getProperty("mail.password"));
 		
 		Properties props = new Properties();
-		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");  // smtp.gmail.com  smtp.sendgrid.com
 		props.put("mail.transport.protocol", "smtp");
 		props.put("mail.smtp.auth", true);
 		props.put("mail.smtp.starttls.enable", true);

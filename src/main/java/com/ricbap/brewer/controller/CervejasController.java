@@ -96,10 +96,18 @@ public class CervejasController {
 		return mv;
 	}
 	
+	
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<ResumoCerveja> pesquisar(CervejaSkuOuNomeFilter cervejaSkuOuNomeFilter) {
-		return cervejaRepository.porSkuOuNome(cervejaSkuOuNomeFilter);
-	}
+		return cervejaRepository.porSkuOuNome(cervejaSkuOuNomeFilter); 
+
+	} 
+	
+	/*
+	 * @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	 * public @ResponseBody List<CervejaDTO> pesquisar(String skuOuNome) { return
+	 * cervejaRepository.porSkuOuNome(skuOuNome); }
+	 */
 	
 	@DeleteMapping("/{codigo}")
 	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Cerveja cerveja) {

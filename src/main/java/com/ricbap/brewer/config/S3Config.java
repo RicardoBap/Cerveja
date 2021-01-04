@@ -15,7 +15,8 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 
 @Configuration
-@PropertySource(value = { "file://${LENOVO}/.brewer-s3.properties" }, ignoreResourceNotFound = true) 
+//@PropertySource(value = { "file://${LENOVO}/.brewer-s3.properties" }, ignoreResourceNotFound = true) 
+@PropertySource({ "classpath:env/nuvem.properties" })
 public class S3Config {
 	
 	@Autowired
@@ -24,11 +25,15 @@ public class S3Config {
 	@Bean
 	public AmazonS3 amazonS3() {
 		AWSCredentials credenciais = new BasicAWSCredentials(
-				env.getProperty("AWS_ACCESS_KEY_ID"), env.getProperty("AWS_SECRET_ACCESS_KEY"));
+				env.getProperty("nuvem.AWS_ACCESS_KEY_ID"), env.getProperty("nuvem.AWS_SECRET_ACCESS_KEY"));
+		
+		System.out.println(">>> access_key: " + env.getProperty("nuvem.AWS_ACCESS_KEY_ID"));
+		System.out.println(">>> secret_access: " + env.getProperty("nuvem.AWS_SECRET_ACCESS_KEY"));
+		
 		AmazonS3 amazonS3 = new AmazonS3Client(credenciais, new ClientConfiguration());
 		Region regiao = Region.getRegion(Regions.US_EAST_1);
 		amazonS3.setRegion(regiao);
 		return amazonS3;
 	}
 
-}
+} 

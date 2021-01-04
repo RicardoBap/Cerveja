@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -24,8 +25,10 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.util.StringUtils;
 
+import com.ricbap.brewer.repository.listener.CervejaEntityListener;
 import com.ricbap.brewer.validation.SKU;
 
+@EntityListeners(CervejaEntityListener.class)
 @Entity
 @Table(name = "cerveja")
 public class Cerveja {
@@ -86,7 +89,15 @@ public class Cerveja {
 	@Transient
 	private boolean novaFoto;
 	
+	// Url da foto
+	@Transient
+	private String urlFoto;	
 	
+	// Url do Thumbnail da foto
+	@Transient
+	private String urlThumbnailFoto;	
+	
+
 	// Call backs do JPA
 	@PrePersist
 	@PreUpdate
@@ -201,6 +212,19 @@ public class Cerveja {
 		this.novaFoto = novaFoto;
 	}
 	
+	public String getUrlFoto() {
+		return urlFoto;
+	}
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
+	}
+	
+	public String getUrlThumbnailFoto() {
+		return urlThumbnailFoto; 
+	}
+	public void setUrlThumbnailFoto(String urlThumbnailFoto) {
+		this.urlThumbnailFoto = urlThumbnailFoto; 
+	}	
 
 
 	@Override

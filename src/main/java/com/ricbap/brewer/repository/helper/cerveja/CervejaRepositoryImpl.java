@@ -105,7 +105,6 @@ public class CervejaRepositoryImpl implements CervejaRepositoryQuery {
 	}
 
 	
-	
 	@Override
 	public List<ResumoCerveja> porSkuOuNome(CervejaSkuOuNomeFilter cervejaSkuOuNomeFilter) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
@@ -142,15 +141,23 @@ public class CervejaRepositoryImpl implements CervejaRepositoryQuery {
 					builder.lower(root.get("nome")), "%" + cervejaSkuOuNomeFilter.getNome().toLowerCase() + "%"));
 		}
 		return predicates.toArray(new Predicate[predicates.size()]);
-	}		
+	} 
+	
+	
 
 }
 
 /*
- * String jpql =
- * "select new com.ricbap.brewer.dto.CervejaDTO(codigo, sku, nome, origem, valor, foto) "
- * + "from Cerveja where sku like :skuOuNome or nome like :skuOuNome";
- * List<CervejaDTO> cervejasFiltradas = manager.createQuery(jpql,
- * CervejaDTO.class) .setParameter("SkuOuNome", skuOuNome + "%")
- * .getResultList(); return cervejasFiltradas;
- */
+public List<CervejaDTO> porSkuOuNome(String skuOuNome) {
+		String jpql = "select new com.ricbap.brewer.dto.CervejaDTO(codigo, sku, nome, origem, valor, foto) "
+				+ "from Cerveja where lower(sku) like lower(:skuOuNome) or lower(nome) like lower(:skuOuNome)";
+		List<CervejaDTO> cervejasFiltradas = manager.createQuery(jpql, CervejaDTO.class) 
+				.setParameter("SkuOuNome", skuOuNome + "%")
+				.getResultList();
+		cervejasFiltradas.forEach(c -> c.setUrlThumbnailFoto(fotoStorage.getUrl(FotoStorage.THUMBNAIL_PREFIX + c.getFoto())));
+		return cervejasFiltradas;
+	}
+*/
+
+ 
+ 

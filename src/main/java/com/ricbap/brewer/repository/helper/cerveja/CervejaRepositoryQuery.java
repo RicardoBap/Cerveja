@@ -15,6 +15,9 @@ public interface CervejaRepositoryQuery {
 	
 	public Page<Cerveja> filtrar(CervejaFilter filter, Pageable pageable);
 	
+	// Cerveja DTO
+	//List<CervejaDTO> porSkuOuNome(String skuOuNome);
+		
 	public List<ResumoCerveja> porSkuOuNome(CervejaSkuOuNomeFilter cervejaSkuOuNomeFilter); 
 	
 	//DASHBOARD

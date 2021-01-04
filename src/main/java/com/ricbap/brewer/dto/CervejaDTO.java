@@ -1,12 +1,8 @@
-package com.ricbap.brewer.repository.projection;
+package com.ricbap.brewer.dto;
 
 import java.math.BigDecimal;
 
-import org.springframework.util.StringUtils;
-
-import com.ricbap.brewer.model.Origem;
-
-public class ResumoCerveja {
+public class CervejaDTO {
 	
 	private Long codigo;
 	private String sku;
@@ -14,18 +10,21 @@ public class ResumoCerveja {
 	private String origem;
 	private BigDecimal valor;
 	private String foto;
+	private String urlThumbnailFoto;
 	
 	
-	public ResumoCerveja(Long codigo, String sku, String nome, Origem origem, BigDecimal valor, String foto) {
+	public CervejaDTO(Long codigo, String sku, String nome, String origem, BigDecimal valor, String foto,
+			String urlThumbnailFoto) {
 		this.codigo = codigo;
 		this.sku = sku;
 		this.nome = nome;
-		this.origem = origem.getDescricao();
+		this.origem = origem;
 		this.valor = valor;
-		this.foto = StringUtils.isEmpty(foto) ? "cerveja-mock.png" : foto;
-	}	
-
-
+		this.foto = foto;
+		this.urlThumbnailFoto = urlThumbnailFoto;
+	}
+	
+	
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -62,5 +61,11 @@ public class ResumoCerveja {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
+	public String getUrlThumbnailFoto() {
+		return urlThumbnailFoto;
+	}
+	public void setUrlThumbnailFoto(String urlThumbnailFoto) {
+		this.urlThumbnailFoto = urlThumbnailFoto;
+	}	
+
 }
