@@ -84,7 +84,7 @@
 		<!-- AWD SDK - S3 -->
 		<aws-java-sdk-s3.version>1.10.77</aws-java-sdk-s3.version>
 		
-		<!-- APACHE COMMONS DBCD -->
+		<!-- APACHE COMMONS DBCP -->
 		<commons-dbcp2.version>2.1.1</commons-dbcp2.version>
 	
 	</properties>
@@ -141,7 +141,7 @@
 		</profile>
 		
 		<profile>
-			<id>nuvem</id>	
+			<id>prod</id>	
 			
 			<activation>
 				<activeByDefault>true</activeByDefault>

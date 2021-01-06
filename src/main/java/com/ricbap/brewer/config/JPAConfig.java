@@ -38,9 +38,9 @@ public class JPAConfig {
 		return dataSourceLookup.getDataSource("jdbc/brewerDB");
 	}
 	
-	@Profile("nuvem")
+	@Profile("prod")
 	@Bean
-	public DataSource dataSourceNuvem() throws URISyntaxException {
+	public DataSource dataSourceProd() throws URISyntaxException {
 		URI jdbUri = new URI(System.getenv("JAWSDB_URL"));
 
 	    String username = jdbUri.getUserInfo().split(":")[0];
@@ -54,7 +54,7 @@ public class JPAConfig {
 	    dataSource.setPassword(password);
 	    dataSource.setInitialSize(10);
 
-	    return dataSource();
+	    return dataSource;
 	}
 	
 	@Bean

@@ -15,7 +15,7 @@ import com.ricbap.brewer.mail.Mailer;
 
 @Configuration
 @ComponentScan(basePackageClasses = Mailer.class)
-@PropertySource({ "classpath:env/mail.properties" })
+@PropertySource( value = { "classpath:env/mail.properties" }, ignoreResourceNotFound = true )
 //@PropertySource(value = { "file://${LENOVO}/.brewer-mail.properties" }, ignoreResourceNotFound = true) 
 public class MailConfig {
 	
@@ -30,8 +30,8 @@ public class MailConfig {
 		mailSender.setUsername(env.getProperty("mail.username")); //"ricbapdevs@gmail.com"
 		mailSender.setPassword(env.getProperty("GMAIL_PASSWORD"));		
 		
-		System.out.println(">>> username: " + env.getProperty("mail.username"));
-		System.out.println(">>> password: " + env.getProperty("mail.password"));
+		//System.out.println(">>> username: " + env.getProperty("mail.username"));
+		//System.out.println(">>> password: " + env.getProperty("mail.password"));
 		
 		Properties props = new Properties();
 		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");  // smtp.gmail.com  smtp.sendgrid.com

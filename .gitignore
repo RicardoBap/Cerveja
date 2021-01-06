@@ -4,6 +4,18 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+#### SPRINGFRAMEWORK ####
+.DS_Store
+Servers/*
+.metadata
+.classpath
+.project
+target/
+bin/
+rebel.xml
+.mvn*
+.mvnw*
+
 ### STS ###
 .apt_generated
 .classpath
