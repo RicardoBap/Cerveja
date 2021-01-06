@@ -28,7 +28,7 @@ public class MailConfig {
 		mailSender.setHost("smtp.gmail.com");  // smtp.gmail.com   smtp.sendgrid.com
 		mailSender.setPort(587);
 		mailSender.setUsername(env.getProperty("mail.username")); //"ricbapdevs@gmail.com"
-		mailSender.setPassword(env.getProperty("mail.password"));		
+		mailSender.setPassword(env.getProperty("GMAIL_PASSWORD"));		
 		
 		System.out.println(">>> username: " + env.getProperty("mail.username"));
 		System.out.println(">>> password: " + env.getProperty("mail.password"));

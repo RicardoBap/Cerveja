@@ -83,6 +83,9 @@
 		
 		<!-- AWD SDK - S3 -->
 		<aws-java-sdk-s3.version>1.10.77</aws-java-sdk-s3.version>
+		
+		<!-- APACHE COMMONS DBCD -->
+		<commons-dbcp2.version>2.1.1</commons-dbcp2.version>
 	
 	</properties>
 	
@@ -107,8 +110,55 @@
 					<driver>com.myql.jdbc.Driver</driver>
 				</configuration> -->
 			</plugin>
+			
+			<plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-dependency-plugin</artifactId>
+	            <executions>
+	                <execution>
+	                    <phase>package</phase>
+	                    <goals><goal>copy</goal></goals>
+	                    <configuration>
+	                        <artifactItems>
+	                            <artifactItem>
+	                                <groupId>com.heroku</groupId>
+	                                <artifactId>webapp-runner</artifactId>
+	                                <version>9.0.41.0</version>
+	                                <destFileName>webapp-runner.jar</destFileName>
+	                            </artifactItem>
+	                        </artifactItems>
+	                    </configuration>
+	                </execution>
+	            </executions>
+	        </plugin>
+        
 		</plugins>
 	</build>
+	
+	<profiles>
+		<profile>
+			<id>local</id>
+		</profile>
+		
+		<profile>
+			<id>nuvem</id>	
+			
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>		
+			
+			<dependencies>
+				<!-- MYSQL Driver -->
+				<dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+					<version>${mysql-connector-java.version}</version>
+					<scope>compile</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+		
+	</profiles>
 	
 	<dependencyManagement>
 		<dependencies>
@@ -211,13 +261,13 @@
 			<scope>compile</scope>
 		</dependency>
 		
-		<!-- MYSQL Driver -->
+		<!-- MYSQL Driver
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector-java.version}</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 		
 		<!-- SPRING DATA JPA -->
 		<dependency>
@@ -340,6 +390,13 @@
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-s3</artifactId>
 			<version>${aws-java-sdk-s3.version}</version>
+		</dependency>
+		
+		<!-- APACHE COMMONS DBCD -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>${commons-dbcp2.version}</version>
 		</dependency>
 
 	</dependencies>

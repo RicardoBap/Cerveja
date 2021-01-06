@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,7 +91,7 @@ public class FotoStorageLocal implements FotoStorage {
 		return "http://localhost:8080/brewer/fotos/" + foto;
 	}
 	
-	
+	/*
 	private String renomearArquivo(String nomeOriginal) {
 		String novoNome = UUID.randomUUID().toString() + "_" + nomeOriginal;
 		
@@ -101,7 +100,7 @@ public class FotoStorageLocal implements FotoStorage {
 		}
 		
 		return novoNome;
-	}
+	} */
 	
 	
 	/*

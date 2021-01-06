@@ -103,7 +103,6 @@ public class CervejaRepositoryImpl implements CervejaRepositoryQuery {
 	private boolean isEstiloPresente(CervejaFilter filter) {
 		return filter.getEstilo() != null && filter.getEstilo().getCodigo() != null;
 	}
-
 	
 	@Override
 	public List<ResumoCerveja> porSkuOuNome(CervejaSkuOuNomeFilter cervejaSkuOuNomeFilter) {
