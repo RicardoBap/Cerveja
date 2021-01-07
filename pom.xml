@@ -135,9 +135,10 @@
 		</plugins>
 	</build>
 	
+
 	<profiles>
 		<profile>
-			<id>local</id>
+			<id>local</id>				
 		</profile>
 		
 		<profile>
@@ -145,10 +146,10 @@
 			
 			<activation>
 				<activeByDefault>true</activeByDefault>
-			</activation>		
+			</activation>									
 			
 			<dependencies>
-				<!-- MYSQL Driver -->
+				<!--  MYSQL Driver  -->
 				<dependency>
 					<groupId>mysql</groupId>
 					<artifactId>mysql-connector-java</artifactId>
@@ -266,8 +267,8 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector-java.version}</version>
-			<scope>provided</scope>
-		</dependency> -->
+			<scope>compile</scope>
+		</dependency>  -->
 		
 		<!-- SPRING DATA JPA -->
 		<dependency>
