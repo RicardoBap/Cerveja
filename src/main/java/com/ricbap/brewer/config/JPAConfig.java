@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -38,7 +39,7 @@ public class JPAConfig {
 	} */
 	
 	
-	@Profile("prod")
+	// @Profile("prod")
 	@Bean
 	public DataSource dataSourceProd() throws URISyntaxException {
 		URI jdbUri = new URI(System.getenv("JAWSDB_URL"));
