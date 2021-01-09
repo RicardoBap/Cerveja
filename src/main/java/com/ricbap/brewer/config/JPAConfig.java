@@ -39,7 +39,7 @@ public class JPAConfig {
 	} */
 	
 	
-	// @Profile("prod")
+	@Profile("prod")
 	@Bean
 	public DataSource dataSourceProd() throws URISyntaxException {
 		URI jdbUri = new URI(System.getenv("JAWSDB_URL"));
