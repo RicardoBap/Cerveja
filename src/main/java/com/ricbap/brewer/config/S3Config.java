@@ -25,10 +25,10 @@ public class S3Config {
 	@Bean
 	public AmazonS3 amazonS3() {
 		AWSCredentials credenciais = new BasicAWSCredentials(
-				env.getProperty("AWS_ACCESS_KEY_ID"), env.getProperty("AWS_SECRET_ACCESS_KEY"));
-		
-		System.out.println(">>> access_key: " + env.getProperty("AWS_ACCESS_KEY_ID"));
-		System.out.println(">>> secret_access: " + env.getProperty("AWS_SECRET_ACCESS_KEY"));
+				env.getProperty(), env.getProperty());
+						// KEY                  SECRET
+		System.out.println(">>> access_key: " + env.getProperty());
+		System.out.println(">>> secret_access: " + env.getProperty();
 		
 		AmazonS3 amazonS3 = new AmazonS3Client(credenciais, new ClientConfiguration());
 		Region regiao = Region.getRegion(Regions.US_EAST_1);

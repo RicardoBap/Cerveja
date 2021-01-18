@@ -31,7 +31,7 @@ public class FotoStotageS3 implements FotoStorage {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FotoStotageS3.class);
 	
-	private static final String BUCKET = "brewer-arquivos";
+	private static final String BUCKET = "brewer-arq";
 	
 	@Autowired
 	private AmazonS3 amazonS3;
@@ -81,7 +81,7 @@ public class FotoStotageS3 implements FotoStorage {
 	@Override
 	public String getUrl(String foto) {
 		if (!StringUtils.isEmpty(foto)) {
-			return "https://brewer-arquivos.s3.amazonaws.com/" + foto;
+			return "https://brewer-arq.s3.amazonaws.com/" + foto;
 		}
 		return null;
 	}
